@@ -1,7 +1,6 @@
 import React from "react";
 
-const TargetNumber = () =>{
+export const TargetNumber = () =>{
     
 }
 
-export default TargetNumber;

@@ -1,7 +1,6 @@
 import React from "react";
 
-const SelectionBar = () =>{
+export const SelectionBar = () =>{
     
 }
 
-export default SelectionBar;

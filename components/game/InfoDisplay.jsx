@@ -1,7 +1,7 @@
 import React from "react";
-import { ScoreDisplay, ScoreDisplay, TargetNumber } from "./ScoreDisplay";
+import { ScoreDisplay, SpeedDisplay, TargetNumber } from "./ScoreDisplay";
 
-const InfoDisplay = () =>{
+export const InfoDisplay = () =>{
     return (
         <>
             <ScoreDisplay/>
@@ -11,4 +11,3 @@ const InfoDisplay = () =>{
     )
 }
 
-export default InfoDisplay;

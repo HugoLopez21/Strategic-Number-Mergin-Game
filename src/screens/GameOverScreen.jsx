@@ -1,7 +1,6 @@
 import React from "react";
 
-const GameOverScreen = () =>{
+export const GameOverScreen = () =>{
     
 }
 
-export default GameOverScreen;

@@ -1,7 +1,6 @@
 import React from "react";
 
-const PenaltyIndicator = () =>{
+export const PenaltyIndicator = () =>{
     
 }
 
-export default PenaltyIndicator;

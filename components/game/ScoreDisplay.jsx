@@ -1,7 +1,6 @@
 import React from "react";
 
-const ScoreDisplay = () =>{
+export const ScoreDisplay = () =>{
 
 }
 
-export default ScoreDisplay;

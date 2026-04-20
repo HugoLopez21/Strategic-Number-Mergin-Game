@@ -1,7 +1,5 @@
 import React from "react";
 
-const SpeedDisplay = () =>{
+export const SpeedDisplay = () =>{
     
 }
-
-export default SpeedDisplay;

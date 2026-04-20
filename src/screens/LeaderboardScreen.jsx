@@ -1,6 +1,5 @@
 import React from "react";
 
-const LeaderboardScreen = () =>{
-    
+export const LeaderboardScreen = () =>{
+    return null
 }
-export default LeaderboardScreen;

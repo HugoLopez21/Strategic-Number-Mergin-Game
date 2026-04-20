@@ -18,5 +18,5 @@ export default function App() {
                 <Stack.Screen name="GameOver" component={GameOverScreen}/>
             </Stack.Navigator>
         </NavigationContainer>
-  );
+    );
 }
