@@ -12,3 +12,5 @@ Stores and manages all game data in real time: the board, score, target number, 
 
 @react-native-async-storage/async-storage:
 Local device storage system. Used to save and retrieve the leaderboard scores even after the player closes the application.
+
+Prueba
