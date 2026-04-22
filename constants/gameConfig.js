@@ -10,10 +10,11 @@ export const blockSelection = {
     max: 4
 }
 
-export const speedTime = {
-    min: 1000,
+export const speedConfig = { 
+    speedList : [5,4,3,2,1],
+    min : 1000,
     max: 5000,
-} 
+}
 
 export const numbersMap = {
     1: { color: "#FF5733", score: 1 },  // Vibrant Orange

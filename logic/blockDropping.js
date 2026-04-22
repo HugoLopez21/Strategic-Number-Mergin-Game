@@ -1,3 +1,5 @@
+import { speedConfig } from "../constants/gameConfig";
+
 function gravityDrop(board, speed){
     let moved = true;
     while(moved){
@@ -16,6 +18,14 @@ function gravityDrop(board, speed){
         }
     }
     return board
+}
+
+
+function getGravitySpeed(score){
+    const {speedList, min} = speedConfig;
+    let speed = Math.floor(score/ 100);
+    if (speed >= speedList.length ) return min;
+    else return speedList[speed] * 1000;
 }
 
 
