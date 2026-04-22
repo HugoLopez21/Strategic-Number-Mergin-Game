@@ -45,9 +45,9 @@ function getTargetNumber(board){
         i++;
     }
 
-    const targetNumber = adjacencyChain.reduce((acc, coord) =>{
+    const targetNumber = adjacencyChain.reduce((prev, coord) =>{
         const {y,x} = coord;
-        return acc + board[y][x]
+        return prev + board[y][x]
     }, 0)
     
     return targetNumber;
