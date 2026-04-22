@@ -1,6 +1,5 @@
-import { gridConfig } from "../constants/gameConfig";
-import {rows, columns } from gridConfig;
-import { numbersMap } from "../constants/gameConfig";
+import { filledRows, gridConfig,numbersMap  } from "../constants/gameConfig";
+const {rows, columns } = gridConfig;
 
 export function initializeBoard(){
     let board = []
@@ -8,10 +7,10 @@ export function initializeBoard(){
         board.push([]);
         for (let x = 0; x < columns; x++){
             // fill de last 3 rows with random numbers from 1 to 9 
-            if (y < (rows - 3)){
+            if (y < (rows - filledRows)){
                 board[y].push(null);
             }else{
-                board[y].push([Math.floor(Math.random() * 9) + 1])
+                board[y].push(Math.floor(Math.random() * 9) + 1)
             }
         }
     }
