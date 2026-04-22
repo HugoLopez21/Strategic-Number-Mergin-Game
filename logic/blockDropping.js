@@ -29,3 +29,27 @@ function getGravitySpeed(score){
 }
 
 
+function dropNewBlocks(isPenalty, sumedBlocks, board, score ){
+    sumedBlocks.forEach(coord => {
+        const x = coord;
+        if(typeof board[0][x] != null) continue;
+        else{
+            board[0][x] = Math.floor(Math.random() * 9) + 1;
+        }
+    });
+    speed = getGravitySpeed(score);
+    gravityDrop(board, speed);
+    
+    if(isPenalty){
+        board[0].forEach(x => {
+            if(typeof x != null) continue;
+            else{
+            board[0][x] = Math.floor(Math.random() * 9) + 1;
+            }
+        })
+        gravityDrop(board, speed);
+    }
+    
+}
+
+

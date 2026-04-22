@@ -6,3 +6,8 @@ function matchScore(targetScore, selectedNums){
     return playerSum === targetScore ? true : false;
     
 }
+
+
+function isPenalty(numPenalties){
+    return numPenalties < 3 ? false : true;
+}
