@@ -1,10 +1,11 @@
 
 
 function getTargetNumber(board){
+    //Pick a random coordinate and check that 
+    // it's a number and has at least one other number around it
     let startPoint = null
     let discardedCoords = []
-    const adjacencyLength = Math.floor(Math.random() * 3) + 1
-    const adjacencyChain = []
+    
     while (startPoint === null){
         const { y, x } = getRandomCoordinate();
         
@@ -22,9 +23,18 @@ function getTargetNumber(board){
         discardedCoords.push({y,x})
     }
     
+    const adjacencyLength = Math.floor(Math.random() * 3) + 1
+    const adjacencyChain = []
     adjacencyChain.push(startPoint)
     let i = 0
+
+    /*
+        Starting from the selected coordinate as the starting point, 
+        randomly select how many adjacent cells will be part of the sum, 
+        then traverse the surrounding cells to add them to the list
+    */ 
     while (i < adjacencyLength ) {
+
         const { y, x } = adjacencyChain[i];
         const available = getAdjacency(y, x, board)
             .filter(coord => !discardedCoords.some(c => c.y === coord.y && c.x === coord.x));
@@ -35,13 +45,11 @@ function getTargetNumber(board){
         i++;
     }
 
-    console.log("adjacency:")
-    console.log(adjacencyChain)
     const targetNumber = adjacencyChain.reduce((acc, coord) =>{
         const {y,x} = coord;
         return acc + board[y][x]
     }, 0)
-    console.log(targetNumber)
+    
     return targetNumber;
 }
 
