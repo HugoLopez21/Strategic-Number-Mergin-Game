@@ -1,21 +1,21 @@
-const gridConfig = {
+export const gridConfig = {
     columns: 8, 
     rows: 10 
 };
 
-const filledRows = 3;
+export const filledRows = 3;
 
-const blockSelection = {
+export const blockSelection = {
     min: 2, 
     max: 4
 }
 
-const speedTime = {
+export const speedTime = {
     min: 1000,
     max: 5000,
 } 
 
-const numbersMap = {
+export const numbersMap = {
     1: { color: "#FF5733", score: 1 },  // Vibrant Orange
     2: { color: "#33FF57", score: 2 },  // Emerald Green
     3: { color: "#3357FF", score: 3 },  // Bright Blue
@@ -26,3 +26,5 @@ const numbersMap = {
     8: { color: "#FF8C33", score: 15 }, // Tangerine
     9: { color: "#8C33FF", score: 20 }  // Violet
 };
+
+
