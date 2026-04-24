@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import {isPenalty, matchScore} from '../logic/scoringLogic'
+import {getPlayerSum, isPenalty, matchScore, selectedBlocksToNums} from '../logic/scoringLogic'
 import {getGravitySpeed, gravityDrop, dro, dropBlocks} from '../logic/blockDropping'
 import { initializeBoard, gameOver } from '../logic/boardLogic';
 import { getTargetNumber, getAdjacency } from '../logic/targetLogic';
@@ -10,7 +10,6 @@ export const useGameContext = create((set) => ({
     selectedBlocks: [],
     board: [],
     targetNumber: 0,
-    playerSumResult: false,
     penalties: 0,
 
     addScore: (points) => {
@@ -49,12 +48,6 @@ export const useGameContext = create((set) => ({
         set({ selectedBlocks: newSelectedBlocks });
     },
 
-    setPlayerSum: () =>{
-        const {selectedBlocks, targetNumber} = get();
-        const newPlayerSumResult = matchScore(targetNumber, selectedBlocks)
-        set({playerSumResult : newPlayerSumResult})
-    },
-
     addPenalty: () =>{
         const {penalties} = get();
         let newPenalties = null;
@@ -68,15 +61,36 @@ export const useGameContext = create((set) => ({
     },
 
     confirmMove: () =>{
+        const {
+                selectedBlocks, 
+                addPenalty,
+                targetNumber, 
+                addScore,
+                board,
+                score,
+            } = get();
+
+        const selectedNums = selectedBlocksToNums(board, selectedBlocks)
+        const moveResult = matchScore(targetNumber, selectedNums);
+        if (moveResult){
+            const newBoard = 
+                dropBlocks(false, selectedBlocks, board, score);
+            addScore(getScore(selectedNums));
+            set({board: newBoard})
+        }else{
+            const newBoard = 
+                dropBlocks(true, selectedBlocks, board, score);
+            set({board: newBoard})
+        }
         
     },
 
     initGame: () =>{
-
+        
     },
 
     endGame: () =>{
-        
+
     }
 
     
