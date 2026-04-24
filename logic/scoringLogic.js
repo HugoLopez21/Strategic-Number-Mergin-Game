@@ -1,4 +1,4 @@
-function matchScore(targetScore, selectedNums){
+export function matchScore(targetScore, selectedNums){
     const playerSum = selectedNums.reduce((prev, num) =>{
         return prev + num;
     }, 0);
@@ -8,6 +8,6 @@ function matchScore(targetScore, selectedNums){
 }
 
 
-function isPenalty(numPenalties){
+export function isPenalty(numPenalties){
     return numPenalties < 3 ? false : true;
 }

@@ -1,4 +1,4 @@
-function checkAdjacency(prevCoord, currentCoord){
+export function checkAdjacency(prevCoord, currentCoord){
     const adjacency = false
     const {y: prevY, x: prevX} = prevCoord;
     const {y: currY, x: currX} = currentCoord;

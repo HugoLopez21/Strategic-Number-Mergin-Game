@@ -1,6 +1,6 @@
 
 
-function getTargetNumber(board){
+export function getTargetNumber(board){
     //Pick a random coordinate and check that 
     // it's a number and has at least one other number around it
     let startPoint = null
@@ -55,7 +55,7 @@ function getTargetNumber(board){
 
 
 
-const getAdjacency = (y,x, board) =>{
+export const getAdjacency = (y,x, board) =>{
     const nearbyCoords = getNearbyCoords(y,x)
     let availableAdjacencyCoords = []
     nearbyCoords.forEach(({y,x}) => {
