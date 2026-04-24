@@ -18,3 +18,10 @@ export function initializeBoard(){
     return board
 }
 
+function gameOver(board){
+    let isGameOver = false;
+    board[0].forEach(cell => {
+        if (cell != null) isGameOver = true;
+    })
+    return isGameOver;
+}
