@@ -1,4 +1,5 @@
-
+import {gridConfig} from '../constants/gameConfig'
+const {rows, columns} = gridConfig;
 
 export function getTargetNumber(board){
     //Pick a random coordinate and check that 

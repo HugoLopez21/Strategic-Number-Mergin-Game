@@ -1,9 +1,19 @@
 import React from "react";
-import {View, Text } from 'react-native'
+import {View, Text, Button } from 'react-native'
+import { useGameContext } from "../../context/context";
+import { useNavigation } from "@react-navigation/native";
 export const MenuScreen = () =>{
+    const { initGame } = useGameContext();
+    const navigation = useNavigation();
+
+    const handleStart = () => {
+        initGame();
+        navigation.navigate("Game");
+    }
+
     return (
         <View>
-            <Text>Menú</Text>
+            <Button title="Play" onPress={handleStart} />
         </View>
     )
 }

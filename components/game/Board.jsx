@@ -6,11 +6,12 @@ import { useGameContext } from "../../context/context";
 
 export const Board = () =>{
     const { board } = useGameContext();
+    console.log(board);
     return (
-        <View>
+        <View style={{flex: 1, backgroundColor: 'white'}}>
             {board.map((row, y) =>{
                 return (
-                    <View key={y}>
+                    <View key={y} style={{flexDirection: 'row'}}>
                         {row.map((cell, x) =>{
                             return (
                                 <Block 
