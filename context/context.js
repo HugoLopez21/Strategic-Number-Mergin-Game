@@ -1,7 +1,7 @@
 import { create } from 'zustand';
-import {getPlayerSum, isPenalty, matchScore, selectedBlocksToNums} from '../logic/scoringLogic'
-import {getGravitySpeed, gravityDrop, dro, dropBlocks} from '../logic/blockDropping'
-import { initializeBoard, gameOver } from '../logic/boardLogic';
+import {isPenalty, matchScore, selectedBlocksToNums} from '../logic/scoringLogic'
+import {getGravitySpeed, dropBlocks} from '../logic/blockDropping'
+import { initializeBoard, checkGameOver } from '../logic/boardLogic';
 import { getTargetNumber, getAdjacency } from '../logic/targetLogic';
 export const useGameContext = create((set) => ({
     score: 0,
@@ -27,7 +27,7 @@ export const useGameContext = create((set) => ({
     addSelectedBlock: (coords) =>  {
 
         const {selectedBlocks} = get();
-        let isAdjacent = null
+        let isAdjacent = null;
         if(selectedBlocks.length > 0){
             isAdjacent = getAdjacency(selectedBlocks.at(-1), coords );
         };
@@ -49,14 +49,16 @@ export const useGameContext = create((set) => ({
     },
 
     addPenalty: () =>{
-        const {penalties} = get();
+        const {penalties, board, isGameOver} = get();
         let newPenalties = null;
+        let setIsGameOver = false
         if(isPenalty(penalties)){ 
-            newPenalties = 0
+            setIsGameOver = checkGameOver(board);
+            newPenalties = 0;
         }else{
-            newPenalties = penalties + 1
+            newPenalties = penalties + 1;
         }
-        set({penalties: newPenalties})
+        set({penalties: newPenalties, isGameOver : setIsGameOver});
         
     },
 
@@ -76,22 +78,43 @@ export const useGameContext = create((set) => ({
             const newBoard = 
                 dropBlocks(false, selectedBlocks, board, score);
             addScore(getScore(selectedNums));
-            set({board: newBoard})
+            set({board: newBoard, selectedBlocks: []});
         }else{
+            addPenalty();
             const newBoard = 
                 dropBlocks(true, selectedBlocks, board, score);
-            set({board: newBoard})
+            set({board: newBoard, selectedBlocks: []});
         }
         
     },
 
     initGame: () =>{
-        
+        const newBoard = initializeBoard();
+        const newTarget = getTargetNumber(newBoard);
+        set({board: newBoard, targetNumber: newTarget})
     },
 
     endGame: () =>{
-
+        const {
+            board, 
+            score, 
+            isGameOver, 
+            speed, 
+            selectedBlocks, 
+            targetNumber, 
+            penalties
+        } = get();
+        set({
+            board: [],
+            score: 0, 
+            isGameOver: true, 
+            speed: 5000, 
+            selectedBlocks: [], 
+            targetNumber: 0,
+            penalties: 0,
+        })
     }
+    
 
     
 }));

@@ -18,7 +18,7 @@ export function initializeBoard(){
     return board
 }
 
-export function gameOver(board){
+export function checkGameOver(board){
     let isGameOver = false;
     board[0].forEach(cell => {
         if (cell != null) isGameOver = true;

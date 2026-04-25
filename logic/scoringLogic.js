@@ -25,7 +25,7 @@ export function selectedBlocksToNums(board, selectedBlocks){
     selectedBlocks.forEach(coord => {
         const {y,x} = coord;
         const num = board[y][x];
-        numsList.push(num)
+        numsList.push(num);
     });
     return numsList;
 }
