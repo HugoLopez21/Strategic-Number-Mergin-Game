@@ -10,12 +10,12 @@ export function initializeBoard(){
             if (y < (rows - filledRows)){
                 board[y].push(null);
             }else{
-                board[y].push(Math.floor(Math.random() * 9) + 1)
-            }
-        }
-    }
+                board[y].push(Math.floor(Math.random() * 9) + 1);
+            };
+        };
+    };
 
-    return board
+    return board;
 }
 
 export function checkGameOver(board){

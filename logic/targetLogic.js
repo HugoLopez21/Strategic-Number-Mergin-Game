@@ -3,8 +3,8 @@
 export function getTargetNumber(board){
     //Pick a random coordinate and check that 
     // it's a number and has at least one other number around it
-    let startPoint = null
-    let discardedCoords = []
+    let startPoint = null;
+    let discardedCoords = [];
     
     while (startPoint === null){
         const { y, x } = getRandomCoordinate();
@@ -16,17 +16,16 @@ export function getTargetNumber(board){
         if (typeof board[y][x] === "number"){
             
             if (getAdjacency(y,x, board).length > 0){
-                startPoint = {y,x}
-                console.log(y, x)
+                startPoint = {y,x};
             }
         }   
         discardedCoords.push({y,x})
-    }
+    };
     
-    const adjacencyLength = Math.floor(Math.random() * 3) + 1
-    const adjacencyChain = []
-    adjacencyChain.push(startPoint)
-    let i = 0
+    const adjacencyLength = Math.floor(Math.random() * 3) + 1;
+    const adjacencyChain = [];
+    adjacencyChain.push(startPoint);
+    let i = 0;
 
     /*
         Starting from the selected coordinate as the starting point, 
@@ -47,8 +46,8 @@ export function getTargetNumber(board){
 
     const targetNumber = adjacencyChain.reduce((prev, coord) =>{
         const {y,x} = coord;
-        return prev + board[y][x]
-    }, 0)
+        return prev + board[y][x];
+    }, 0);
     
     return targetNumber;
 }
@@ -56,15 +55,15 @@ export function getTargetNumber(board){
 
 
 export const getAdjacency = (y,x, board) =>{
-    const nearbyCoords = getNearbyCoords(y,x)
-    let availableAdjacencyCoords = []
+    const nearbyCoords = getNearbyCoords(y,x);
+    let availableAdjacencyCoords = [];
     nearbyCoords.forEach(({y,x}) => {
         if (typeof board[y][x] === "number"){
-            availableAdjacencyCoords.push({y,x})
-            
+            availableAdjacencyCoords.push({y,x});
+            ;
         }
-    })
-    return availableAdjacencyCoords
+    });
+    return availableAdjacencyCoords;
 }
 
 function getNearbyCoords(y, x) {
@@ -84,15 +83,15 @@ function getNearbyCoords(y, x) {
 }
 const getRandomCoordinate = () =>{
     //Row
-    const y = Math.floor(Math.random() *  rows)
+    const y = Math.floor(Math.random() *  rows);
 
     //Column
-    const x = Math.floor(Math.random() * columns)
+    const x = Math.floor(Math.random() * columns);
 
     return {y, x};
-}
+};
 
 
 const randomChoice = (max) =>{
-    return Math.floor(Math.random() * max)
-}
+    return Math.floor(Math.random() * max);
+};

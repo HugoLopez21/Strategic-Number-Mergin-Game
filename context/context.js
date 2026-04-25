@@ -3,7 +3,7 @@ import {isPenalty, matchScore, selectedBlocksToNums} from '../logic/scoringLogic
 import {getGravitySpeed, dropBlocks} from '../logic/blockDropping'
 import { initializeBoard, checkGameOver } from '../logic/boardLogic';
 import { getTargetNumber, getAdjacency } from '../logic/targetLogic';
-export const useGameContext = create((set) => ({
+export const useGameContext = create((set, get) => ({
     score: 0,
     isGameOver: false,
     speed: 5000,
@@ -51,7 +51,7 @@ export const useGameContext = create((set) => ({
     addPenalty: () =>{
         const {penalties, board, isGameOver} = get();
         let newPenalties = null;
-        let setIsGameOver = false
+        let setIsGameOver = false;
         if(isPenalty(penalties)){ 
             setIsGameOver = checkGameOver(board);
             newPenalties = 0;
@@ -72,7 +72,7 @@ export const useGameContext = create((set) => ({
                 score,
             } = get();
 
-        const selectedNums = selectedBlocksToNums(board, selectedBlocks)
+        const selectedNums = selectedBlocksToNums(board, selectedBlocks);
         const moveResult = matchScore(targetNumber, selectedNums);
         if (moveResult){
             const newBoard = 
@@ -91,7 +91,7 @@ export const useGameContext = create((set) => ({
     initGame: () =>{
         const newBoard = initializeBoard();
         const newTarget = getTargetNumber(newBoard);
-        set({board: newBoard, targetNumber: newTarget})
+        set({board: newBoard, targetNumber: newTarget});
     },
 
     endGame: () =>{
