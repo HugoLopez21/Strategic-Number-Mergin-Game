@@ -5,7 +5,7 @@ import { InfoDisplay } from "../../components/game/InfoDisplay";
 import { SelectionBar } from "../../components/game/SelectionBar";
 
 export const GameScreen = () =>{
-    return null
+    return <Board/>
     // return (
     //     <>
     //         <Board/>
