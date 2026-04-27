@@ -1,16 +1,16 @@
 import React from "react";
-import { ScoreDisplay, SpeedDisplay, TargetNumber } from "./ScoreDisplay";
-import { View } from "react-native-web";
+import { ScoreDisplay } from "./ScoreDisplay";
+import {SpeedDisplay} from "./SpeedDisplay";
+import {TargetNumber} from "./TargetNumber";
+import { View } from "react-native";
+import { infoStyles } from "../../styles/components/InfoDisplayStyles";
 export const InfoDisplay = () =>{
     return (
-        <>
-            <View>
-                <ScoreDisplay/>
-                <SpeedDisplay/>
-                <TargetNumber/>
-            </View>
-            
-        </>
+        <View style={infoStyles.container}>
+            <ScoreDisplay/>
+            <SpeedDisplay/>
+            <TargetNumber/>
+        </View>
     )
 }
 

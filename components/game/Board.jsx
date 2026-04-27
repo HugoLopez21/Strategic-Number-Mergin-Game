@@ -2,18 +2,20 @@ import React from "react";
 import {View, Text, TouchableOpacity} from 'react-native';
 import {useState} from 'react';
 import { useGameContext } from "../../context/context";
-
+import { boardStyles } from "../../styles/components/BoardStyles";
+import { globalStyles } from "../../styles/globalStyles";
+import { numbersMap } from "../../constants/gameConfig";
 
 export const Board = () =>{
     const { board } = useGameContext();
     return (
-        <View style={{flex: 1, backgroundColor: 'white'}}>
+        <View style={boardStyles.container}>
             {board.map((row, y) =>{
                 return (
-                    <View key={y} style={{flexDirection: 'row'}}>
+                    <View key={y} style={boardStyles.row}>
                         {row.map((cell, x) =>{
                             return (
-                                <Block 
+                                <Block
                                     key={`${y}-${x}`} 
                                     num={board[y][x]}
                                     coords={{y,x}}
@@ -41,11 +43,18 @@ const Block = (props) =>{
             addSelectedBlock(props.coords);
         }
     }
-
+    const isNum = props.num !== null;
     return (
-        <TouchableOpacity onPress={clickBlock}>
+        <TouchableOpacity 
+            onPress={clickBlock} 
+            style={
+                [
+                    globalStyles.centeredText,
+                    isClicked ? boardStyles.blockSelected : boardStyles.block,
+                    isNum ? {backgroundColor : numbersMap[props.num]?.color} : boardStyles.blockEmpty,
+                ]}>
             <View>
-                <Text>{props.num}</Text>
+                <Text style={boardStyles.blockText}>{props.num}</Text>
             </View>
         </TouchableOpacity>
     )
