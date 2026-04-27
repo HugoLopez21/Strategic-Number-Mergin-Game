@@ -1,12 +1,15 @@
 import React from "react";
 import { ScoreDisplay, SpeedDisplay, TargetNumber } from "./ScoreDisplay";
-
+import { View } from "react-native-web";
 export const InfoDisplay = () =>{
     return (
         <>
-            <ScoreDisplay/>
-            <SpeedDisplay/>
-            <TargetNumber/>
+            <View>
+                <ScoreDisplay/>
+                <SpeedDisplay/>
+                <TargetNumber/>
+            </View>
+            
         </>
     )
 }

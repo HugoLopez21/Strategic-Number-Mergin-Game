@@ -6,7 +6,6 @@ import { useGameContext } from "../../context/context";
 
 export const Board = () =>{
     const { board } = useGameContext();
-    console.log(board);
     return (
         <View style={{flex: 1, backgroundColor: 'white'}}>
             {board.map((row, y) =>{
@@ -19,8 +18,7 @@ export const Board = () =>{
                                     num={board[y][x]}
                                     coords={{y,x}}
                                 />
-                                )
-
+                            )
                         })}
                     </View>
                 )
@@ -35,9 +33,9 @@ const Block = (props) =>{
     const [isClicked, setIsClicked] = useState(false);
     const { addSelectedBlock, removeBlock } = useGameContext();
     const clickBlock = () =>{
-        const newIsCLicked = !isClicked
-        setIsClicked(newIsCLicked)
-        if(newIsCLicked){
+        const newIsClicked = !isClicked
+        setIsClicked(newIsClicked)
+        if(newIsClicked){
             removeBlock(props.coords);
         }else{
             addSelectedBlock(props.coords);
