@@ -15,7 +15,7 @@ export const SelectionBar = () =>{
 
 
 const SelectedCombination = () =>{
-    const {selectedBlocks, board, currentSum} = useGameContext();
+    const {selectedBlocks, board, prevSum} = useGameContext();
     const selectedNums = selectedBlocksToNums(board, selectedBlocks);
     return (
         <View style={selectionStyles.combination}>
@@ -23,7 +23,7 @@ const SelectedCombination = () =>{
             {selectedNums.map(num => {
                 return <Text style={selectionStyles.num}>{num} +</Text>
             })}
-            <Text style={selectionStyles.num}>={currentSum} </Text>
+            <Text style={selectionStyles.num}>={prevSum} </Text>
         </View>
         
     )

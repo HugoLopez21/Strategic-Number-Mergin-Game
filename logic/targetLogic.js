@@ -56,7 +56,6 @@ export function getTargetNumber(board){
 
 
 export const getAdjacency = (y,x, board) =>{
-    
     const nearbyCoords = getNearbyCoords(y,x);
     let availableAdjacencyCoords = [];
     nearbyCoords.forEach(({y,x}) => {

@@ -5,13 +5,6 @@ export function matchScore(targetScore, playerSum){
     
 }
 
-export function getSum(selectedNums){
-    const playerSum = selectedNums.reduce((prev, num) =>{
-        return prev + num;
-    }, 0);
-    return playerSum;
-}
-
 export function getScore(selectedNums){
     const score = selectedNums.reduce((prev, num)=>{
         return prev + numbersMap[num].score;
