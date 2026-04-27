@@ -7,7 +7,7 @@ export const SpeedDisplay = () =>{
     return (
         <View style={infoStyles.box}>
             <Text style={infoStyles.label}>SPEED:</Text> 
-            <Text style={infoStyles.value}>{speed}</Text>
+            <Text style={infoStyles.value}>{speed / 1000} seconds</Text>
         </View>
     )
 }

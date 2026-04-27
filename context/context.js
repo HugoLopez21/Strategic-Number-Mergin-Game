@@ -1,8 +1,10 @@
 import { create } from 'zustand';
 import {isPenalty, matchScore, selectedBlocksToNums} from '../logic/scoringLogic'
-import {getGravitySpeed, dropBlocks} from '../logic/blockDropping'
+import {getGravitySpeed, dropBlocks, gravityDrop} from '../logic/blockDropping'
 import { initializeBoard, checkGameOver } from '../logic/boardLogic';
 import { getTargetNumber, getAdjacency } from '../logic/targetLogic';
+import { getScore } from '../logic/scoringLogic';
+import { checkAdjacency } from '../logic/adjacencyLogic';
 export const useGameContext = create((set, get) => ({
     score: 0,
     isGameOver: false,
@@ -11,6 +13,17 @@ export const useGameContext = create((set, get) => ({
     board: [],
     targetNumber: 0,
     penalties: 0,
+    prevSum: 0,
+
+    setCurrentSum: (isClicked, coords) =>{
+        const {prevSum, board} = get();
+        const {y,x} = coords;
+        const num = board[y][x];
+        const newSum = isClicked ? prevSum + num : prevSum - num
+        set({prevSum: newSum})
+    },
+
+
 
     addScore: (points) => {
         const newScore = get().score + points;
@@ -29,23 +42,24 @@ export const useGameContext = create((set, get) => ({
         const {selectedBlocks} = get();
         let isAdjacent = null;
         if(selectedBlocks.length > 0){
-            isAdjacent = getAdjacency(selectedBlocks.at(-1), coords );
+            const prevCoords = selectedBlocks.at(-1);
+            isAdjacent = checkAdjacency(prevCoords, coords)
+            console.log(isAdjacent)
         };
 
         if (isAdjacent || selectedBlocks.length === 0){
             const newSelectedBlocks = [...selectedBlocks, coords];
             set({ selectedBlocks: newSelectedBlocks });
         };
-        
-        
     },
 
     removeBlock: (coords) =>{
         const {selectedBlocks} = get();
         const newSelectedBlocks = selectedBlocks.filter(currCoords => {
-            return currCoords !== coords;
+            return currCoords === coords;
         })
         set({ selectedBlocks: newSelectedBlocks });
+        console.log(selectedBlocks)
     },
 
     addPenalty: () =>{
@@ -74,15 +88,18 @@ export const useGameContext = create((set, get) => ({
 
         const selectedNums = selectedBlocksToNums(board, selectedBlocks);
         const moveResult = matchScore(targetNumber, selectedNums);
+        
         if (moveResult){
             const newBoard = 
                 dropBlocks(false, selectedBlocks, board, score);
+            console.log(board)
             addScore(getScore(selectedNums));
             set({board: newBoard, selectedBlocks: []});
         }else{
             addPenalty();
             const newBoard = 
                 dropBlocks(true, selectedBlocks, board, score);
+            console.log(board)
             set({board: newBoard, selectedBlocks: []});
         }
         

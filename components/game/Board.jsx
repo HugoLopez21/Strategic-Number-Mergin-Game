@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {View, Text, TouchableOpacity} from 'react-native';
 import {useState} from 'react';
 import { useGameContext } from "../../context/context";
@@ -7,7 +7,7 @@ import { globalStyles } from "../../styles/globalStyles";
 import { numbersMap } from "../../constants/gameConfig";
 
 export const Board = () =>{
-    const { board } = useGameContext();
+    const { board, speed} = useGameContext();
     return (
         <View style={boardStyles.container}>
             {board.map((row, y) =>{
@@ -33,14 +33,16 @@ export const Board = () =>{
 
 const Block = (props) =>{
     const [isClicked, setIsClicked] = useState(false);
-    const { addSelectedBlock, removeBlock } = useGameContext();
+    const { addSelectedBlock, removeBlock, setCurrentSum } = useGameContext();
     const clickBlock = () =>{
         const newIsClicked = !isClicked
         setIsClicked(newIsClicked)
         if(newIsClicked){
-            removeBlock(props.coords);
-        }else{
             addSelectedBlock(props.coords);
+            setCurrentSum(newIsClicked, props.coords);
+        }else{
+            removeBlock(props.coords);
+            setCurrentSum(newIsClicked, props.coords);
         }
     }
     const isNum = props.num !== null;
@@ -51,6 +53,7 @@ const Block = (props) =>{
                 [
                     globalStyles.centeredText,
                     isClicked ? boardStyles.blockSelected : boardStyles.block,
+                    boardStyles.block,
                     isNum ? {backgroundColor : numbersMap[props.num]?.color} : boardStyles.blockEmpty,
                 ]}>
             <View>

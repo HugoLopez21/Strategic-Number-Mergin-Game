@@ -1,6 +1,7 @@
 import { speedConfig, rows, columns } from "../constants/gameConfig";
 
-export function gravityDrop(board, speed){
+export function gravityDrop(prevBoard, speed){
+    let board = prevBoard.map(row => [...row]);
     let moved = true;
     while(moved){
         moved = false;
@@ -29,17 +30,11 @@ export function getGravitySpeed(score){
 }
 
 
-export function dropBlocks(isPenalty, sumedBlocks, board, score ){
-    sumedBlocks.forEach(coord => {
-        const {y, x} = coord;
-        board[y][x] = null;
-        if(board[0][x] != null) return;
-        else{
-            board[0][x] = Math.floor(Math.random() * 9) + 1;
-        }
-    });
+export function dropBlocks( prevBoard, score ){
+    let board = prevBoard.map(row => [...row]);
+
     const speed = getGravitySpeed(score);
-    gravityDrop(board, speed);
+    board = gravityDrop(board, speed);
     
     if(isPenalty){
         board[0].forEach((x, index) => {
@@ -48,7 +43,7 @@ export function dropBlocks(isPenalty, sumedBlocks, board, score ){
             board[0][index] = Math.floor(Math.random() * 9) + 1;
             }
         })
-        gravityDrop(board, speed);
+        board = gravityDrop(board, speed);
     }
     
     return board;

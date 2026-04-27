@@ -10,9 +10,9 @@ import { gameScreenStyles } from "../../styles/screens/GameScreenStyles";
 export const GameScreen = () =>{
     return (
         <View style={gameScreenStyles.container}>
-            <Board/>
             <PenaltyIndicator/>
             <InfoDisplay/>
+            <Board/>
             <SelectionBar/>
         </View>
     )
