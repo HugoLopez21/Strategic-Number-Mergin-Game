@@ -5,9 +5,16 @@ import { useGameContext } from "../../context/context";
 import { boardStyles } from "../../styles/components/BoardStyles";
 import { globalStyles } from "../../styles/globalStyles";
 import { numbersMap } from "../../constants/gameConfig";
-
+import { dropRandomBlock } from "../../logic/blockDropping";
 export const Board = () =>{
-    const { board, speed} = useGameContext();
+    const { board, speed, updateBoard} = useGameContext();
+    useEffect( ()=>{
+        const interval = setInterval(() =>{
+            updateBoard();
+            console.log('Ejecutando intervalo')
+        },speed)
+        return () => clearInterval(interval);
+    },[speed, board])
     return (
         <View style={boardStyles.container}>
             {board.map((row, y) =>{

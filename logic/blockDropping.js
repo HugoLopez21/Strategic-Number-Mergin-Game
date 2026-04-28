@@ -53,4 +53,10 @@ export function dropBlocks(selectedBlocks, isPenalty, board, score ){
     return board;
 }
 
+export function dropRandomBlock(board, speed){
+    board[0][Math.floor(Math.random() * 8)] = Math.floor(Math.random() * 9) + 1
+    board = gravityDrop(board, speed);
+    return board;
+}
+
 

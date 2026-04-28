@@ -24,5 +24,6 @@ export function selectedBlocksToNums(board, selectedBlocks){
 }
 
 export function isPenalty(numPenalties){
-    return numPenalties < 3 ? false : true;
+    console.log(numPenalties)
+    return numPenalties < 2 ? false : true;
 }
