@@ -12,8 +12,8 @@ export const boardStyles = StyleSheet.create({
         flexDirection: 'row',
     },
     block: {
-        width: 38,
-        height: 38,
+        width: 45,
+        height: 45,
         margin: 1,
         borderRadius: 8,
         alignItems: 'center',

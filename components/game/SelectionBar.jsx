@@ -19,11 +19,11 @@ const SelectedCombination = () =>{
     const selectedNums = selectedBlocksToNums(board, selectedBlocks);
     return (
         <View style={selectionStyles.combination}>
-            <Text>SELECTION:</Text>
+            <Text style={selectionStyles.numText}>SELECTION:</Text>
             {selectedNums.map(num => {
-                return <Text style={selectionStyles.num}>{num} +</Text>
+                return <Text style={selectionStyles.numText}>{num} +</Text>
             })}
-            <Text style={selectionStyles.num}>={prevSum} </Text>
+            <Text style={selectionStyles.numText}>= {prevSum} </Text>
         </View>
         
     )
