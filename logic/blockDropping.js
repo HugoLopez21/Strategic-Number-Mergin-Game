@@ -1,5 +1,5 @@
 import { speedConfig, gridConfig } from "../constants/gameConfig";
-
+import { randomChoice } from "./targetLogic";
 const {rows, columns} = gridConfig;
 
 export function gravityDrop(board, speed){
@@ -54,7 +54,7 @@ export function dropBlocks(selectedBlocks, isPenalty, board, score ){
 }
 
 export function dropRandomBlock(board, speed){
-    board[0][Math.floor(Math.random() * 8)] = Math.floor(Math.random() * 9) + 1
+    board[0][randomChoice(8)] = randomChoice(9,1);
     board = gravityDrop(board, speed);
     return board;
 }

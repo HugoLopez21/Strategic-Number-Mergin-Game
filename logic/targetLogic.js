@@ -84,15 +84,18 @@ function getNearbyCoords(y, x) {
 }
 const getRandomCoordinate = () =>{
     //Row
-    const y = Math.floor(Math.random() *  rows);
+    const y = randomChoice(rows);
 
     //Column
-    const x = Math.floor(Math.random() * columns);
+    const x = randomChoice(columns);
 
     return {y, x};
 };
 
 
-const randomChoice = (max) =>{
-    return Math.floor(Math.random() * max);
+export const randomChoice = (max, min = null) =>{
+    if(min === null)
+        return Math.floor(Math.random() * max);
+    else
+        return Math.floor(Math.random() * max) + min;
 };
