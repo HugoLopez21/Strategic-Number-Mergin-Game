@@ -16,7 +16,6 @@ export const useGameContext = create((set, get) => ({
     prevSum: 0,
     
     setCurrentSum: (isClicked, coords) =>{
-        console.log(isClicked)
         const {prevSum, board,} = get();
         const {y,x} = coords;
         const num = board[y][x];
@@ -55,7 +54,7 @@ export const useGameContext = create((set, get) => ({
     removeBlock: (coords, isClicked) =>{
         const {selectedBlocks, setCurrentSum} = get();
         const newSelectedBlocks = selectedBlocks.filter(currCoords => {
-            return currCoords === coords;
+            return !(currCoords.y === coords.y && currCoords.x === coords.x);
         })
         setCurrentSum(isClicked,coords);
         set({ selectedBlocks: newSelectedBlocks });
@@ -86,6 +85,7 @@ export const useGameContext = create((set, get) => ({
                 score,
                 prevSum,
                 penalties,
+                setTargetNumber,
             } = get();
 
         const selectedNums = selectedBlocksToNums(board, selectedBlocks);
@@ -95,6 +95,7 @@ export const useGameContext = create((set, get) => ({
                 dropBlocks(selectedBlocks, false, board, score);
             
             addScore(getScore(selectedNums));
+            setTargetNumber();
             set({board: newBoard, selectedBlocks: [], prevSum: 0});
         }else{
             addPenalty();
