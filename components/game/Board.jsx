@@ -33,17 +33,16 @@ export const Board = () =>{
 
 const Block = (props) =>{
     const [isClicked, setIsClicked] = useState(false);
-    const { addSelectedBlock, removeBlock, setCurrentSum } = useGameContext();
+    const { addSelectedBlock, removeBlock, setCurrentSum} = useGameContext();
     const clickBlock = () =>{
         const newIsClicked = !isClicked
         setIsClicked(newIsClicked)
         if(newIsClicked){
-            addSelectedBlock(props.coords);
-            setCurrentSum(newIsClicked, props.coords);
+            addSelectedBlock(props.coords, newIsClicked);
         }else{
-            removeBlock(props.coords);
-            setCurrentSum(newIsClicked, props.coords);
+            removeBlock(props.coords, newIsClicked);
         }
+        
     }
     const isNum = props.num !== null;
     return (

@@ -16,6 +16,7 @@ export const useGameContext = create((set, get) => ({
     prevSum: 0,
     
     setCurrentSum: (isClicked, coords) =>{
+        console.log(isClicked)
         const {prevSum, board,} = get();
         const {y,x} = coords;
         const num = board[y][x];
@@ -35,29 +36,30 @@ export const useGameContext = create((set, get) => ({
         set({targetNumber: newTargetNumber});
     },
 
-    addSelectedBlock: (coords) =>  {
+    addSelectedBlock: (coords, isClicked) =>  {
 
-        const {selectedBlocks} = get();
+        const {selectedBlocks, setCurrentSum,} = get();
         let isAdjacent = null;
         if(selectedBlocks.length > 0){
             const prevCoords = selectedBlocks.at(-1);
             isAdjacent = checkAdjacency(prevCoords, coords)
-            console.log(isAdjacent)
         };
-
+    
         if (isAdjacent || selectedBlocks.length === 0){
             const newSelectedBlocks = [...selectedBlocks, coords];
-            set({ selectedBlocks: newSelectedBlocks });
+            setCurrentSum(isClicked,coords);
+            set({ selectedBlocks: newSelectedBlocks});
         };
     },
 
-    removeBlock: (coords) =>{
-        const {selectedBlocks} = get();
+    removeBlock: (coords, isClicked) =>{
+        const {selectedBlocks, setCurrentSum} = get();
         const newSelectedBlocks = selectedBlocks.filter(currCoords => {
             return currCoords === coords;
         })
+        setCurrentSum(isClicked,coords);
         set({ selectedBlocks: newSelectedBlocks });
-        console.log(selectedBlocks)
+
     },
 
     addPenalty: () =>{
@@ -91,14 +93,13 @@ export const useGameContext = create((set, get) => ({
         if (moveResult){
             const newBoard = 
                 dropBlocks(selectedBlocks, false, board, score);
-            console.log(board)
+            
             addScore(getScore(selectedNums));
             set({board: newBoard, selectedBlocks: [], prevSum: 0});
         }else{
             addPenalty();
             const newBoard = 
                 dropBlocks(selectedBlocks, isPenalty(penalties), board, score);
-            console.log(board)
             set({board: newBoard, selectedBlocks: [], prevSum: 0});
         }
         
