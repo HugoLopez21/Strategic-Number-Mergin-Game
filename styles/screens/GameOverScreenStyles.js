@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { colors } from '../globalStyles';
 
-export const menuStyles = StyleSheet.create({
+export const gameOverStyles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.background,
@@ -10,9 +10,13 @@ export const menuStyles = StyleSheet.create({
         gap: 20,
     },
     title: {
-        color: colors.text,
-        fontSize: 32,
+        color: '#e94560',
+        fontSize: 36,
         fontWeight: 'bold',
+    },
+    score: {
+        color: colors.text,
+        fontSize: 24,
     },
     button: {
         backgroundColor: '#3a7bd5',
