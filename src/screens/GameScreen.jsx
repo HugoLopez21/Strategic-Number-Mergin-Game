@@ -15,7 +15,11 @@ export const GameScreen = () =>{
 
     useEffect(() => {
         if(isGameOver) {
-            navigation.navigate('GameOver');
+            setTimeout(
+                navigation.navigate('GameOver'),
+                1000
+            )
+            
         }
     }, [isGameOver]);
 

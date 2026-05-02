@@ -78,8 +78,9 @@ export const useGameContext = create((set, get) => ({
     updateBoard: () =>{
         const {board, speed, isGameOver} = get();
         const updatedBoard = dropRandomBlock(board, speed)
+        set({board : updatedBoard});
         const setIsGameOver = checkGameOver(board);
-        set({board : updatedBoard, isGameOver: setIsGameOver});
+        set({isGameOver: setIsGameOver});
     },
 
     confirmMove: () =>{
