@@ -38,7 +38,7 @@ export const Board = () =>{
 
 
 
-const Block = (props) =>{
+export const Block = (props) =>{
     const { addSelectedBlock, selectedBlocks, removeBlock, setCurrentSum} = useGameContext();
     const isClicked = selectedBlocks.some(c => c.y === props.coords.y && c.x === props.coords.x);
     const clickBlock = () =>{
@@ -53,13 +53,13 @@ const Block = (props) =>{
     return (
         <TouchableOpacity 
             onPress={clickBlock} 
-            style={
-                [
-                    globalStyles.centeredText,
-                    isClicked ? boardStyles.blockSelected : boardStyles.block,
-                    boardStyles.block,
-                    isNum ? {backgroundColor : numbersMap[props.num]?.color} : boardStyles.blockEmpty,
-                ]}>
+            style={[
+                globalStyles.centeredText,
+                boardStyles.block, 
+                isNum ? {backgroundColor: numbersMap[props.num]?.color} : boardStyles.blockEmpty, 
+                isClicked && boardStyles.blockSelected 
+            ]}
+        >
             <View>
                 <Text style={boardStyles.blockText}>{props.num}</Text>
             </View>

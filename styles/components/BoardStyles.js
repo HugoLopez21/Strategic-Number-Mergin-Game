@@ -12,17 +12,17 @@ export const boardStyles = StyleSheet.create({
         flexDirection: 'row',
     },
     block: {
-        width: 45,
-        height: 45,
-        margin: 1,
+        width: 38,
+        height: 38,
+        margin: 3,
         borderRadius: 8,
         alignItems: 'center',
         justifyContent: 'center',
-        borderWidth: 2,
+        borderWidth: 4,
         borderColor: 'transparent',
     },
     blockSelected: {
-        borderColor: colors.selected,
+        borderColor: "#f7f181",
         shadowColor: '#fff',
         shadowOpacity: 0.8,
         shadowRadius: 4,
@@ -34,5 +34,8 @@ export const boardStyles = StyleSheet.create({
         color: colors.text,
         fontWeight: 'bold',
         fontSize: 14,
+        textShadowColor: 'rgba(0, 0, 0)',
+        textShadowOffset: { width: 0, height: 0 }, 
+        textShadowRadius: 1,
     }
 })

@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
-import { View, Text } from "react-native-web";
+import { View, Text } from "react-native";
 import { useGameContext } from "../../context/context";
 import { gameOverStyles } from "../../styles/screens/GameOverScreenStyles";
-import { Touchable, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 export const GameOverScreen = () =>{
     const {score} = useGameContext();
+    const navigation = useNavigation();
     const handleReturnMenu = () =>{
         navigation.navigate("Menu");
     }
@@ -13,9 +15,9 @@ export const GameOverScreen = () =>{
             <Text style={gameOverStyles.title}>
                 Game Over!
             </Text>
-            <text style={gameOverStyles.score}>
+            <Text style={gameOverStyles.score}>
                 Score: {score}
-            </text>
+            </Text>
             <TouchableOpacity style={gameOverStyles.button}>
                 <Text 
                     style={gameOverStyles.buttonText} 
