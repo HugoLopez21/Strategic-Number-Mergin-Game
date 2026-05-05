@@ -11,7 +11,6 @@ export const Board = () =>{
     useEffect( ()=>{
         const interval = setInterval(() =>{
             updateBoard();
-            console.log('Ejecutando intervalo')
         },speed)
         return () => clearInterval(interval);
     },[speed, board])

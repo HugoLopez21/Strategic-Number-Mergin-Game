@@ -39,7 +39,7 @@ export const useGameContext = create((set, get) => ({
 
         const {selectedBlocks, setCurrentSum,} = get();
         let isAdjacent = null;
-        if(selectedBlocks.length > 0){
+        if(selectedBlocks.length > 0 && selectedBlocks.length < 4){
             const prevCoords = selectedBlocks.at(-1);
             isAdjacent = checkAdjacency(prevCoords, coords)
         };
@@ -79,6 +79,7 @@ export const useGameContext = create((set, get) => ({
         const {board, speed, isGameOver} = get();
         const updatedBoard = dropRandomBlock(board, speed)
         set({board : updatedBoard});
+        
         const setIsGameOver = checkGameOver(board);
         set({isGameOver: setIsGameOver});
     },
@@ -95,7 +96,7 @@ export const useGameContext = create((set, get) => ({
                 penalties,
                 setTargetNumber,
             } = get();
-
+        
         const selectedNums = selectedBlocksToNums(board, selectedBlocks);
         const moveResult = matchScore(targetNumber, prevSum);
         if (moveResult){

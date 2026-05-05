@@ -23,6 +23,5 @@ export function checkGameOver(board){
     board[0].forEach(cell => {
         if (cell != null) isGameOver = true;
     })
-    console.log("Checking game over:",isGameOver)
     return isGameOver;
 }

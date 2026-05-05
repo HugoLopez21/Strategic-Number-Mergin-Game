@@ -49,7 +49,6 @@ export function getTargetNumber(board){
         const {y,x} = coord;
         return prev + board[y][x];
     }, 0);
-    console.log(adjacencyChain)
     return targetNumber;
 }
 
