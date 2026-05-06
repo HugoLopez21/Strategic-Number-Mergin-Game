@@ -17,9 +17,7 @@ export const Board = () =>{
             if (dropIntervalRef.current) clearInterval(dropIntervalRef.current);
             if (gravityIntervalRef.current) clearInterval(gravityIntervalRef.current);
         };
-
         clear();
-
         dropIntervalRef.current = setInterval(() => {
             updateBoard();
         }, speed);

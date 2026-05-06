@@ -90,16 +90,13 @@ export const useGameContext = create((set, get) => ({
     },
 
     updateBoard: () =>{
-        const {board, speed, isGameOver} = get();
+        const {board, speed} = get();
         const updatedBoard = dropRandomBlock(board)
         set({board : updatedBoard});
-        
-        //const setIsGameOver = checkGameOver(board);
-        //set({isGameOver: setIsGameOver});
     },
 
     applyGravity: () => {
-        const { board } = get();
+        const { board, isGameOver } = get();
         const boardCopy = board.map(row => [...row]);
         let moved = false;
         for (let y = gridConfig.rows - 1; y > 0; y--) {
@@ -114,6 +111,9 @@ export const useGameContext = create((set, get) => ({
 
         if (moved) {
             set({ board: boardCopy });
+        }
+        if (checkGameOver(boardCopy)) {
+            set({ isGameOver: true });
         }
     },
 
