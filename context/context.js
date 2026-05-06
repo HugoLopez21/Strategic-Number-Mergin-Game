@@ -99,6 +99,14 @@ export const useGameContext = create((set, get) => ({
         //set({isGameOver: setIsGameOver});
     },
 
+    applyGravity: () =>{
+        const {board, currentRow} = get();
+        const boardCopy = board.map(row => [...row]);
+        const newBoard = gravityDropStep(boardCopy, currentRow)
+        const nextRow = currentRow <= 1 ? gridConfig.rows - 1 : currentRow - 1;
+        set({board: boardCopy, currentRow: nextRow});
+    },
+
     confirmMove: () =>{
         const {
                 selectedBlocks, 
