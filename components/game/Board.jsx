@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import {View, Text, TouchableOpacity} from 'react-native';
 import {useState} from 'react';
 import { useGameContext } from "../../context/context";
@@ -8,19 +8,25 @@ import { numbersMap, gridConfig } from "../../constants/gameConfig";
 import { dropRandomBlock } from "../../logic/blockDropping";
 export const Board = () =>{
     const { board, speed, updateBoard, applyGravity} = useGameContext();
+    const gravityIntervalRef = useRef(null);
+    const dropIntervalRef = useRef(null);
         useEffect(() => {
             
-    
-            const dropInterval = setInterval(() => {
+            const dropIntervalRef = setInterval(() => {
                 updateBoard();
-                const gravityInterval = setInterval(() => {
+                const gravityIntervalRef = setInterval(() => {
                     applyGravity();
                 }, speed / gridConfig.rows);
             }, speed);
     
             return () => {
-                clearInterval(gravityInterval);
-                clearInterval(dropInterval);
+                if(gravityIntervalRef.current){
+                    clearInterval(gravityIntervalRef.current);
+                }
+                if(dropIntervalRef.current){
+                    clearInterval(dropIntervalRef.current);
+                }
+                
             };
         }, [speed]);
     return (

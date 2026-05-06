@@ -123,7 +123,6 @@ export const useGameContext = create((set, get) => ({
         const selectedNums = selectedBlocksToNums(board, selectedBlocks);
 
         //Añadir mensaje en pantalla indicando que no se puede realizar un movimiento con menos de 2 bloques
-        isAdjacent = checkAdjacency
         if(selectedNums.length < 2) return console.log('turno no ejecutado')
         
             const moveResult = matchScore(targetNumber, prevSum);
