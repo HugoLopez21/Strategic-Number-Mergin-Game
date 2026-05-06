@@ -10,25 +10,26 @@ export const Board = () =>{
     const { board, speed, updateBoard, applyGravity} = useGameContext();
     const gravityIntervalRef = useRef(null);
     const dropIntervalRef = useRef(null);
-        useEffect(() => {
-            
-            const dropIntervalRef = setInterval(() => {
-                updateBoard();
-                const gravityIntervalRef = setInterval(() => {
-                    applyGravity();
-                }, speed / gridConfig.rows);
-            }, speed);
-    
-            return () => {
-                if(gravityIntervalRef.current){
-                    clearInterval(gravityIntervalRef.current);
-                }
-                if(dropIntervalRef.current){
-                    clearInterval(dropIntervalRef.current);
-                }
-                
-            };
-        }, [speed]);
+        
+    useEffect(() => {
+        // Limpieza preventiva
+        const clear = () => {
+            if (dropIntervalRef.current) clearInterval(dropIntervalRef.current);
+            if (gravityIntervalRef.current) clearInterval(gravityIntervalRef.current);
+        };
+
+        clear();
+
+        dropIntervalRef.current = setInterval(() => {
+            updateBoard();
+        }, speed);
+
+        gravityIntervalRef.current = setInterval(() => {
+            applyGravity();
+        }, speed / gridConfig.rows);
+
+        return clear; // Limpiar al desmontar
+    }, [speed, updateBoard, applyGravity]); // Añade las funciones a las dependencias
     return (
         <View style={boardStyles.container}>
             {board.map((row, y) =>{

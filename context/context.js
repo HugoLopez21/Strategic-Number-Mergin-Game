@@ -15,7 +15,6 @@ export const useGameContext = create((set, get) => ({
     targetNumber: 0,
     penalties: 0,
     prevSum: 0,
-    currentRow: gridConfig.rows-1,
     
     setCurrentSum: (isClicked, coords) =>{
         const {prevSum, board,} = get();
@@ -99,12 +98,23 @@ export const useGameContext = create((set, get) => ({
         //set({isGameOver: setIsGameOver});
     },
 
-    applyGravity: () =>{
-        const {board, currentRow} = get();
+    applyGravity: () => {
+        const { board } = get();
         const boardCopy = board.map(row => [...row]);
-        const newBoard = gravityDropStep(boardCopy, currentRow)
-        const nextRow = currentRow <= 1 ? gridConfig.rows - 1 : currentRow - 1;
-        set({board: boardCopy, currentRow: nextRow});
+        let moved = false;
+        for (let y = gridConfig.rows - 1; y > 0; y--) {
+            for (let x = 0; x < gridConfig.columns; x++) {
+                if (boardCopy[y][x] === null && boardCopy[y - 1][x] !== null) {
+                    boardCopy[y][x] = boardCopy[y - 1][x];
+                    boardCopy[y - 1][x] = null;
+                    moved = true;
+                }
+            }
+        }
+
+        if (moved) {
+            set({ board: boardCopy });
+        }
     },
 
     confirmMove: () =>{

@@ -18,10 +18,10 @@ export const GameOverScreen = () =>{
             <Text style={gameOverStyles.score}>
                 Score: {score}
             </Text>
-            <TouchableOpacity style={gameOverStyles.button}>
-                <Text 
-                    style={gameOverStyles.buttonText} 
-                    onPress={handleReturnMenu}> 
+            <TouchableOpacity 
+                style={gameOverStyles.button} 
+                onPress={handleReturnMenu}>
+                <Text style={gameOverStyles.buttonText}> 
                     Return to menu
                 </Text>
             </TouchableOpacity>

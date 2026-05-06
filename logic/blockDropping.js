@@ -6,8 +6,7 @@ export function gravityDropStep(board, rowPos){
     for (let x = 0; x< columns;x++){
         let currentCell = board[rowPos][x];
         let topCell = board[rowPos-1][x];
-        if (currentCell === null && 
-            (topCell !== null && topCell !== undefined)){
+        if (currentCell === null && topCell !== null){
             board[rowPos][x] = topCell;
             board[rowPos-1][x] = null;
         };
