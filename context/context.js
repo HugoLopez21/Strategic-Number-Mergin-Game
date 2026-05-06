@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import {isPenalty, matchScore, selectedBlocksToNums} from '../logic/scoringLogic'
-import {getGravitySpeed, dropBlocks, gravityDrop, dropRandomBlock} from '../logic/blockDropping'
+import {getGravitySpeed, dropBlocks, gravityDrop, dropRandomBlock, gravityDropStep} from '../logic/blockDropping'
 import { initializeBoard, checkGameOver } from '../logic/boardLogic';
 import { getTargetNumber, getAdjacency } from '../logic/targetLogic';
 import { getScore } from '../logic/scoringLogic';
@@ -14,6 +14,7 @@ export const useGameContext = create((set, get) => ({
     targetNumber: 0,
     penalties: 0,
     prevSum: 0,
+    currentRow: gridConfig.rows-1,
     
     setCurrentSum: (isClicked, coords) =>{
         const {prevSum, board,} = get();
@@ -90,11 +91,11 @@ export const useGameContext = create((set, get) => ({
 
     updateBoard: () =>{
         const {board, speed, isGameOver} = get();
-        const updatedBoard = dropRandomBlock(board, speed)
+        const updatedBoard = dropRandomBlock(board)
         set({board : updatedBoard});
         
-        const setIsGameOver = checkGameOver(board);
-        set({isGameOver: setIsGameOver});
+        //const setIsGameOver = checkGameOver(board);
+        //set({isGameOver: setIsGameOver});
     },
 
     confirmMove: () =>{

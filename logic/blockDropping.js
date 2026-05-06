@@ -2,24 +2,17 @@ import { speedConfig, gridConfig } from "../constants/gameConfig";
 import { randomChoice } from "./targetLogic";
 const {rows, columns} = gridConfig;
 
-export function gravityDrop(board, speed){
-    let moved = true;
-    while(moved){
-        moved = false;
-        for(let y = rows-1; y> 0; y--){
-            for (let x = 0; x< columns;x++){
-                let currentCell = board[y][x];
-                let topCell = board[y-1][x];
-                if (currentCell === null && 
-                    typeof topCell === "number"){
-                    moved = true;
-                    board[y][x] = topCell;
-                    board[y-1][x] = null;
-                };
-            };
+export function gravityDropStep(board, rowPos){
+    for (let x = 0; x< columns;x++){
+        let currentCell = board[rowPos][x];
+        let topCell = board[rowPos-1][x];
+        if (currentCell === null && 
+            (topCell !== null && topCell !== undefined)){
+            board[rowPos][x] = topCell;
+            board[rowPos-1][x] = null;
         };
     };
-    return board;
+    return board
 }
 
 
@@ -39,23 +32,20 @@ export function dropBlocks(selectedBlocks, isPenalty, board, score ){
         const {y, x} = coord;
         board[y][x] = null;
     })
-    board = gravityDrop(board, speed);
     if(isPenalty){
         board[0].forEach((x, index) => {
             if( x != null) return;
             else{
-            board[0][index] = Math.floor(Math.random() * 9) + 1;
+            board[0][index] = randomChoice(9,1);
             }
         })
-        board = gravityDrop(board, speed);
     }
     
     return board;
 }
 
-export function dropRandomBlock(board, speed){
+export function dropRandomBlock(board){
     board[0][randomChoice(8)] = randomChoice(9,1);
-    board = gravityDrop(board, speed);
     return board;
 }
 

@@ -4,16 +4,25 @@ import {useState} from 'react';
 import { useGameContext } from "../../context/context";
 import { boardStyles } from "../../styles/components/BoardStyles";
 import { globalStyles } from "../../styles/globalStyles";
-import { numbersMap } from "../../constants/gameConfig";
+import { numbersMap, gridConfig } from "../../constants/gameConfig";
 import { dropRandomBlock } from "../../logic/blockDropping";
 export const Board = () =>{
-    const { board, speed, updateBoard} = useGameContext();
-    useEffect( ()=>{
-        const interval = setInterval(() =>{
-            updateBoard();
-        },speed)
-        return () => clearInterval(interval);
-    },[speed, board])
+    const { board, speed, updateBoard, applyGravity} = useGameContext();
+        useEffect(() => {
+            
+    
+            const dropInterval = setInterval(() => {
+                updateBoard();
+                const gravityInterval = setInterval(() => {
+                    applyGravity();
+                }, speed / gridConfig.rows);
+            }, speed);
+    
+            return () => {
+                clearInterval(gravityInterval);
+                clearInterval(dropInterval);
+            };
+        }, [speed]);
     return (
         <View style={boardStyles.container}>
             {board.map((row, y) =>{
