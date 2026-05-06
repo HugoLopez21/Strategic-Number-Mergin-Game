@@ -56,6 +56,14 @@ export const useGameContext = create((set, get) => ({
 
     removeBlock: (coords, isClicked) =>{
         const {selectedBlocks, setCurrentSum} = get();
+        const isSame = (a, b) => a && b && a.x === b.x && a.y === b.y;
+
+        const first = selectedBlocks.at(0);
+        const last = selectedBlocks.at(-1);
+
+        if (!isSame(first, coords) && !isSame(last, coords)) {
+            return;
+        }
         const newSelectedBlocks = selectedBlocks.filter(currCoords => {
             return !(currCoords.y === coords.y && currCoords.x === coords.x);
         })
@@ -103,6 +111,7 @@ export const useGameContext = create((set, get) => ({
         const selectedNums = selectedBlocksToNums(board, selectedBlocks);
 
         //Añadir mensaje en pantalla indicando que no se puede realizar un movimiento con menos de 2 bloques
+        isAdjacent = checkAdjacency
         if(selectedNums.length < 2) return console.log('turno no ejecutado')
         
             const moveResult = matchScore(targetNumber, prevSum);
