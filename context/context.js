@@ -47,11 +47,13 @@ export const useGameContext = create((set, get) => ({
         };
     
         if (isAdjacent || selectedBlocks.length === 0){
-            const newSelectedBlocks = [...selectedBlocks, coords];
+            const isAdjacentToFirst = selectedBlocks.length > 0 && checkAdjacency([selectedBlocks.at(0)], coords);
+            const newSelectedBlocks = isAdjacentToFirst 
+                ? [coords, ...selectedBlocks]
+                : [...selectedBlocks, coords];
             setCurrentSum(isClicked,coords);
             set({ selectedBlocks: newSelectedBlocks});
         };
-        console.log(selectedBlocks)
     },
 
     removeBlock: (coords, isClicked) =>{
