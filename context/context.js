@@ -5,6 +5,7 @@ import { initializeBoard, checkGameOver } from '../logic/boardLogic';
 import { getTargetNumber, getAdjacency } from '../logic/targetLogic';
 import { getScore } from '../logic/scoringLogic';
 import { checkAdjacency } from '../logic/adjacencyLogic';
+import { gridConfig } from '../constants/gameConfig';
 export const useGameContext = create((set, get) => ({
     score: 0,
     isGameOver: false,
