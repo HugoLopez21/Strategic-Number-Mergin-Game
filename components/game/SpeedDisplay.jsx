@@ -1,3 +1,5 @@
+// This component shows the actual speed of the blocks
+
 import React from "react";
 import {View, Text } from 'react-native';
 import { useGameContext } from "../../context/context";

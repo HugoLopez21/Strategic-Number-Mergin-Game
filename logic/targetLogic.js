@@ -1,3 +1,6 @@
+//Game logic for choose the target number of the game
+
+
 import {gridConfig} from '../constants/gameConfig'
 const {rows, columns} = gridConfig;
 

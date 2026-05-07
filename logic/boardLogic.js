@@ -1,3 +1,5 @@
+// Game logic for the generation of the  intial board
+
 import { filledRows, gridConfig,numbersMap  } from "../constants/gameConfig";
 const {rows, columns } = gridConfig;
 

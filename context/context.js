@@ -1,3 +1,7 @@
+// Context file used with zustand for create the variables of the game
+// to get acces from the other components easier- 
+
+
 import { create } from 'zustand';
 import {isPenalty, isCorrectSum, selectedBlocksToNums} from '../logic/scoringLogic'
 import {getGravitySpeed, dropBlocks, gravityDrop, dropRandomBlock, applyGravityStep} from '../logic/blockDropping'

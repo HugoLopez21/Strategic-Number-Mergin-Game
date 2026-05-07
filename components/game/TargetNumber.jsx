@@ -1,3 +1,5 @@
+// Shows the target number
+
 import React from "react";
 import {View, Text } from 'react-native';
 import { useGameContext } from "../../context/context";

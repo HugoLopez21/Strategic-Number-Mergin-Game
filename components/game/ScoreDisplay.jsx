@@ -1,3 +1,5 @@
+// Component to show the current score of the player
+
 import React from "react";
 import {View, Text } from 'react-native';
 import { useGameContext } from "../../context/context";

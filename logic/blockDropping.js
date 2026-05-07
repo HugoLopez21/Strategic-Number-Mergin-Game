@@ -1,3 +1,5 @@
+// Game logic for block dropping mechanics and gravity simulation
+
 import { speedConfig, gridConfig } from "../constants/gameConfig";
 import { randomChoice } from "./targetLogic";
 const {rows, columns} = gridConfig;

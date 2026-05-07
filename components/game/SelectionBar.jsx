@@ -1,3 +1,5 @@
+//Component to show on the screen the sum of the selected blocks
+
 import React from "react";
 import {View, Text, TouchableOpacity} from 'react-native';
 import { useGameContext } from "../../context/context";

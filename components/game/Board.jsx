@@ -1,3 +1,5 @@
+// Board and blocks component on the screen
+
 import React, { useEffect, useRef } from "react";
 import {View, Text, TouchableOpacity} from 'react-native';
 import {useState} from 'react';

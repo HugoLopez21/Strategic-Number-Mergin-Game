@@ -1,3 +1,5 @@
+// Component that contains the info of the game
+
 import React from "react";
 import { ScoreDisplay } from "./ScoreDisplay";
 import {SpeedDisplay} from "./SpeedDisplay";

@@ -1,3 +1,6 @@
+
+// Config file
+
 export const gridConfig = {
     columns: 8, 
     rows: 10 

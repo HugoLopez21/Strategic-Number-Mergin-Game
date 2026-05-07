@@ -1,3 +1,5 @@
+// game logic for check adjecency of selected blocks
+
 export function checkAdjacency(selectedBlocks, currentCoord, ){
     const {y: currY, x: currX} = currentCoord;
     const adjacency = selectedBlocks.map(coord =>{
