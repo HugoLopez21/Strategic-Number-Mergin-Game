@@ -1,6 +1,7 @@
 // Game logic for the generation of the  intial board
 
 import { filledRows, gridConfig,numbersMap  } from "../constants/gameConfig";
+import { randomChoice } from "./targetLogic";
 const {rows, columns } = gridConfig;
 
 export function initializeBoard(){
@@ -12,7 +13,7 @@ export function initializeBoard(){
             if (y < (rows - filledRows)){
                 board[y].push(null);
             }else{
-                board[y].push(Math.floor(Math.random() * 9) + 1);
+                board[y].push(randomChoice(9,1));
             };
         };
     };

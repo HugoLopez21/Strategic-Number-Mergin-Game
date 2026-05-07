@@ -1,4 +1,4 @@
-import { numbersMap } from "../constants/gameConfig";
+import { maxPenalties, numbersMap } from "../constants/gameConfig";
 
 export function isCorrectSum(targetScore, playerSum){
     return playerSum === targetScore ? true : false;
@@ -24,5 +24,5 @@ export function selectedBlocksToNums(board, selectedBlocks){
 }
 
 export function isPenalty(numPenalties){
-    return numPenalties < 2 ? false : true;
+    return numPenalties < maxPenalties ? false : true;
 }

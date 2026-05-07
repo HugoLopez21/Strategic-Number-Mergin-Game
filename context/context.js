@@ -9,7 +9,7 @@ import { initializeBoard, checkGameOver } from '../logic/boardLogic';
 import { getTargetNumber, getAdjacency } from '../logic/targetLogic';
 import { getScore } from '../logic/scoringLogic';
 import { checkAdjacency } from '../logic/adjacencyLogic';
-import { gridConfig } from '../constants/gameConfig';
+import { blockSelection, gridConfig } from '../constants/gameConfig';
 export const useGameContext = create((set, get) => ({
     score: 0,
     isGameOver: false,
@@ -43,9 +43,10 @@ export const useGameContext = create((set, get) => ({
     addSelectedBlock: (coords, isClicked) =>  {
 
         const {selectedBlocks, setCurrentSum,} = get();
+        const {maxSelected} = blockSelection;
         let isAdjacent = null;
         
-        if(selectedBlocks.length > 0 && selectedBlocks.length < 4){
+        if(selectedBlocks.length > 0 && selectedBlocks.length < maxSelected){
             const prevCoords = selectedBlocks.at(-1);
             isAdjacent = checkAdjacency(selectedBlocks, coords)
         };
@@ -134,9 +135,9 @@ export const useGameContext = create((set, get) => ({
             } = get();
         
         const selectedNums = selectedBlocksToNums(board, selectedBlocks);
-
+        const {minSelected} = blockSelection;
         //Añadir mensaje en pantalla indicando que no se puede realizar un movimiento con menos de 2 bloques
-        if(selectedNums.length < 2) return console.log('turno no ejecutado')
+        if(selectedNums.length < minSelected) return console.log('turno no ejecutado')
         
             const moveResult = isCorrectSum(targetNumber, currentSum);
         if (moveResult){

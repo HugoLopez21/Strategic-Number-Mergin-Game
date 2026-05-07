@@ -9,8 +9,8 @@ export const gridConfig = {
 export const filledRows = 3;
 
 export const blockSelection = {
-    min: 2, 
-    max: 4
+    minSelected: 2, 
+    maxSelected: 4
 }
 
 export const speedConfig = { 
@@ -19,6 +19,7 @@ export const speedConfig = {
     max: 5000,
 }
 
+export const maxPenalties = 3;
 export const numbersMap = {
     1: { color: "#FF5733", score: 1 },  // Vibrant Orange
     2: { color: "#33FF57", score: 2 },  // Emerald Green
