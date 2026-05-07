@@ -5,6 +5,5 @@ export function checkAdjacency(selectedBlocks, currentCoord, ){
         return Math.abs(prevY - currY) <= 1 && 
         Math.abs(prevX - currX) <= 1;
     })
-    console.log(adjacency)
     return adjacency.includes(true) ? true : false
 }

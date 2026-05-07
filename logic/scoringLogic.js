@@ -1,6 +1,6 @@
 import { numbersMap } from "../constants/gameConfig";
 
-export function matchScore(targetScore, playerSum){
+export function isCorrectSum(targetScore, playerSum){
     return playerSum === targetScore ? true : false;
     
 }

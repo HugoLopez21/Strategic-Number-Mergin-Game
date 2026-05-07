@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import {isPenalty, matchScore, selectedBlocksToNums} from '../logic/scoringLogic'
-import {getGravitySpeed, dropBlocks, gravityDrop, dropRandomBlock, gravityDropStep} from '../logic/blockDropping'
+import {isPenalty, isCorrectSum, selectedBlocksToNums} from '../logic/scoringLogic'
+import {getGravitySpeed, dropBlocks, gravityDrop, dropRandomBlock, applyGravityStep} from '../logic/blockDropping'
 import { initializeBoard, checkGameOver } from '../logic/boardLogic';
 import { getTargetNumber, getAdjacency } from '../logic/targetLogic';
 import { getScore } from '../logic/scoringLogic';
@@ -14,14 +14,14 @@ export const useGameContext = create((set, get) => ({
     board: [],
     targetNumber: 0,
     penalties: 0,
-    prevSum: 0,
+    currentSum: 0,
     
     setCurrentSum: (isClicked, coords) =>{
-        const {prevSum, board,} = get();
+        const {currentSum, board,} = get();
         const {y,x} = coords;
         const num = board[y][x];
-        const newSum = isClicked ? prevSum + num : prevSum - num
-        set({prevSum: newSum})
+        const newSum = isClicked ? currentSum + num : currentSum - num
+        set({currentSum: newSum})
     },
 
     addScore: (points) => {
@@ -44,7 +44,6 @@ export const useGameContext = create((set, get) => ({
         if(selectedBlocks.length > 0 && selectedBlocks.length < 4){
             const prevCoords = selectedBlocks.at(-1);
             isAdjacent = checkAdjacency(selectedBlocks, coords)
-            console.log(isAdjacent)
         };
     
         if (isAdjacent || selectedBlocks.length === 0){
@@ -89,7 +88,7 @@ export const useGameContext = create((set, get) => ({
         
     },
 
-    updateBoard: () =>{
+    dropNewBlock: () =>{
         const {board, speed} = get();
         const updatedBoard = dropRandomBlock(board)
         set({board : updatedBoard});
@@ -125,7 +124,7 @@ export const useGameContext = create((set, get) => ({
                 addScore,
                 board,
                 score,
-                prevSum,
+                currentSum,
                 penalties,
                 setTargetNumber,
             } = get();
@@ -135,20 +134,19 @@ export const useGameContext = create((set, get) => ({
         //Añadir mensaje en pantalla indicando que no se puede realizar un movimiento con menos de 2 bloques
         if(selectedNums.length < 2) return console.log('turno no ejecutado')
         
-            const moveResult = matchScore(targetNumber, prevSum);
+            const moveResult = isCorrectSum(targetNumber, currentSum);
         if (moveResult){
             const newBoard = 
                 dropBlocks(selectedBlocks, false, board, score);
-            
-                
+        
             addScore(getScore(selectedNums));
             setTargetNumber();
-            set({board: newBoard, selectedBlocks: [], prevSum: 0});
+            set({board: newBoard, selectedBlocks: [], currentSum: 0});
         }else{
             addPenalty();
             const newBoard = 
                 dropBlocks(selectedBlocks, isPenalty(penalties), board, score);
-            set({board: newBoard, selectedBlocks: [], prevSum: 0});
+            set({board: newBoard, selectedBlocks: [], currentSum: 0});
         }
         
     },

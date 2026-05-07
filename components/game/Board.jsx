@@ -7,7 +7,7 @@ import { globalStyles } from "../../styles/globalStyles";
 import { numbersMap, gridConfig } from "../../constants/gameConfig";
 import { dropRandomBlock } from "../../logic/blockDropping";
 export const Board = () =>{
-    const { board, speed, updateBoard, applyGravity} = useGameContext();
+    const { board, speed, dropNewBlock, applyGravity} = useGameContext();
     const gravityIntervalRef = useRef(null);
     const dropIntervalRef = useRef(null);
         useEffect(() => {
@@ -16,7 +16,7 @@ export const Board = () =>{
             }, speed / gridConfig.rows);
 
             const dropInterval = setInterval(() => {
-                updateBoard();
+                dropNewBlock();
             }, speed);
 
             return () => {

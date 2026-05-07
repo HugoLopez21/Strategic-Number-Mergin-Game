@@ -2,7 +2,7 @@ import { speedConfig, gridConfig } from "../constants/gameConfig";
 import { randomChoice } from "./targetLogic";
 const {rows, columns} = gridConfig;
 
-export function gravityDropStep(board, rowPos){
+export function applyGravityStep(board, rowPos){
     for (let x = 0; x< columns;x++){
         let currentCell = board[rowPos][x];
         let topCell = board[rowPos-1][x];
@@ -25,7 +25,7 @@ export function getGravitySpeed(score){
 
 export function dropBlocks(selectedBlocks, isPenalty, board, score ){
     
-
+    
     const speed = getGravitySpeed(score);
     selectedBlocks.forEach(coord => {
         const {y, x} = coord;
