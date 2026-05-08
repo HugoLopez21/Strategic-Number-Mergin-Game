@@ -12,10 +12,13 @@ export const Board = () =>{
     const { board, speed, dropNewBlock, applyGravity, isGameOver} = useGameContext();
     const gravityIntervalRef = useRef(null);
     const dropIntervalRef = useRef(null);
-        useEffect(() => {
+        
+    
+    useEffect(() => {
             if (isGameOver) return;
             const gravityInterval = setInterval(() => {
                 applyGravity();
+            // The block move 1 position in the interval of the speed / the numbers of rows of the grid
             }, speed / gridConfig.rows);
 
             const dropInterval = setInterval(() => {
@@ -52,6 +55,8 @@ export const Board = () =>{
 
 export const Block = (props) =>{
     const { addSelectedBlock, selectedBlocks, removeBlock, setCurrentSum} = useGameContext();
+
+    // Check if the block is clicked
     const isClicked = selectedBlocks.some(c => c.y === props.coords.y && c.x === props.coords.x);
     const clickBlock = () =>{
         if(!isClicked){

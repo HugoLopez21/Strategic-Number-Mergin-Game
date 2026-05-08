@@ -4,6 +4,14 @@ import { speedConfig, gridConfig } from "../constants/gameConfig";
 import { randomChoice } from "./targetLogic";
 const {rows, columns} = gridConfig;
 
+
+/**
+ * Iterate the selected row of the board matrix and interchange the values
+ * in case of the cell above is a number and the one below is null
+ * @param {Array<Array>} board - Board Matrix
+ * @param {int} rowPos - current row position
+ * @returns {Array<Array>} modified board
+ */
 export function applyGravityStep(board, rowPos){
     for (let x = 0; x< columns;x++){
         let currentCell = board[rowPos][x];
@@ -24,9 +32,8 @@ export function getGravitySpeed(score){
     else return speedList[speed] * 1000;
 }
 
-
+//Generates random numbers in all of the cells of the first row
 export function dropBlocks(selectedBlocks, isPenalty, board, score ){
-    
     
     const speed = getGravitySpeed(score);
     selectedBlocks.forEach(coord => {

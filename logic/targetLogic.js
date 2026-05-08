@@ -4,8 +4,15 @@
 import {gridConfig} from '../constants/gameConfig'
 const {rows, columns} = gridConfig;
 
+
+/**
+ * Generate a objective number based on one of the adjacents cells
+ * @param {Array<Array>} board - Board matrix.
+ * @returns {number}
+ */
+
 export function getTargetNumber(board){
-    //Pick a random coordinate and check that 
+    //Pick a random coordinate and check if 
     // it's a number and has at least one other number around it
     let startPoint = null;
     let discardedCoords = [];
@@ -56,6 +63,10 @@ export function getTargetNumber(board){
 }
 
 
+/**
+ * Check the nearby coords in search of a block with a number
+ * @returns {Array<Array>} array with the coords of cell availables
+ */
 
 export const getAdjacency = (y,x, board) =>{
     const nearbyCoords = getNearbyCoords(y,x);
@@ -85,12 +96,8 @@ function getNearbyCoords(y, x) {
     );
 }
 const getRandomCoordinate = () =>{
-    //Row
     const y = randomChoice(rows);
-
-    //Column
     const x = randomChoice(columns);
-
     return {y, x};
 };
 

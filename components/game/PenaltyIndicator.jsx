@@ -9,7 +9,9 @@ export const PenaltyIndicator = () =>{
     return(
         <View style={penaltyStyles.container}>
             <Text style={penaltyStyles.label}>WRONG:</Text>
+            
             {[0,1,2].map(i => (
+                //Array of 3 elements to draw the dots
                 <View 
                     key={i} 
                     style={[penaltyStyles.dot, i < penalties && penaltyStyles.dotActive]}
