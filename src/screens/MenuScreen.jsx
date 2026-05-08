@@ -3,9 +3,10 @@ import { View, Text, TextInput, TouchableOpacity, Modal, ScrollView } from 'reac
 import { useGameContext } from "../../context/context";
 import { useNavigation } from "@react-navigation/native";
 import { menuStyles } from "../../styles/screens/MenuScreenStyles";
+import { LeaderboardScreen } from "./LeaderboardScreen";
 
 export const MenuScreen = () => {
-    const { initGame } = useGameContext();
+    const { initGame, saveUsername } = useGameContext();
     const navigation = useNavigation();
     const [username, setUsername] = useState('');
     const [rulesVisible, setRulesVisible] = useState(false);
@@ -13,6 +14,7 @@ export const MenuScreen = () => {
     const handleStart = () => {
         if(username.trim() === '') return;
         initGame();
+        saveUsername(username);
         navigation.navigate("Game");
     }
 
@@ -35,6 +37,8 @@ export const MenuScreen = () => {
             <TouchableOpacity style={menuStyles.rulesButton} onPress={() => setRulesVisible(true)}>
                 <Text style={menuStyles.rulesButtonText}>HOW TO PLAY</Text>
             </TouchableOpacity>
+
+            <LeaderboardScreen/>
 
             <Modal visible={rulesVisible} transparent animationType="fade">
                 <View style={menuStyles.modalOverlay}>

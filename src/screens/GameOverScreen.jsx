@@ -16,7 +16,7 @@ export const GameOverScreen = () =>{
                 Game Over!
             </Text>
             <Text style={gameOverStyles.score}>
-                Score: {score}
+                Your score: {score}
             </Text>
             <TouchableOpacity 
                 style={gameOverStyles.button} 

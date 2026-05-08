@@ -9,10 +9,11 @@ import { globalStyles } from "../../styles/globalStyles";
 import { numbersMap, gridConfig } from "../../constants/gameConfig";
 import { dropRandomBlock } from "../../logic/blockDropping";
 export const Board = () =>{
-    const { board, speed, dropNewBlock, applyGravity} = useGameContext();
+    const { board, speed, dropNewBlock, applyGravity, isGameOver} = useGameContext();
     const gravityIntervalRef = useRef(null);
     const dropIntervalRef = useRef(null);
         useEffect(() => {
+            if (isGameOver) return;
             const gravityInterval = setInterval(() => {
                 applyGravity();
             }, speed / gridConfig.rows);
@@ -25,7 +26,7 @@ export const Board = () =>{
                 clearInterval(gravityInterval);
                 clearInterval(dropInterval);
             };
-        }, [speed]);
+        }, [speed, isGameOver]);
     return (
         <View style={boardStyles.container}>
             {board.map((row, y) =>{

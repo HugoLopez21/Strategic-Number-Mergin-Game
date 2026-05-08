@@ -17,7 +17,7 @@ export const GameScreen = () =>{
         if(isGameOver) {
             setTimeout(() =>{
                 navigation.navigate('GameOver');
-            }, 1000)
+            }, 2000)
         }
     }, [isGameOver]);
 

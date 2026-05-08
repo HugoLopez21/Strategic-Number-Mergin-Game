@@ -1,32 +1,75 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '../globalStyles';
+import { colors, typography, spacing } from '../globalStyles';
 
-export const gameOverStyles = StyleSheet.create({
+export const leaderboardStyles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.background,
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: 20,
+        padding: spacing.lg,
     },
     title: {
-        color: '#e94560',
-        fontSize: 36,
+        color: colors.text,
+        fontSize: typography.xlarge,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginBottom: spacing.lg,
+    },
+    header: {
+        backgroundColor: 'rgba(255,255,255,0.1)',
+        borderRadius: 8,
+        marginBottom: spacing.sm,
+    },
+    headerText: {
+        color: colors.textSecondary,
+        fontSize: typography.small,
+        fontWeight: 'bold',
+        textTransform: 'uppercase',
+        flex: 1,
+        textAlign: 'center',
+    },
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingVertical: spacing.sm,
+        paddingHorizontal: spacing.md,
+        marginBottom: spacing.xs,
+        backgroundColor: 'rgba(255,255,255,0.05)',
+        borderRadius: 8,
+    },
+    rankText: {
+        color: colors.textSecondary,
+        fontSize: typography.medium,
+        width: 30,
+    },
+    cellUser: {
+        color: colors.text,
+        fontSize: typography.medium,
+        fontWeight: 'bold',
+        flex: 1,
+    },
+    cellScore: {
+        color: '#e6a817',
+        fontSize: typography.medium,
         fontWeight: 'bold',
     },
-    score: {
-        color: colors.text,
-        fontSize: 24,
+    emptyText: {
+        color: colors.textSecondary,
+        fontSize: typography.medium,
+        textAlign: 'center',
+        marginTop: spacing.xl,
     },
-    button: {
+    backButton: {
+        marginTop: spacing.lg,
         backgroundColor: '#3a7bd5',
         paddingHorizontal: 40,
         paddingVertical: 14,
         borderRadius: 12,
+        alignSelf: 'center',
     },
-    buttonText: {
+    backButtonText: {
         color: colors.text,
-        fontSize: 18,
+        fontSize: typography.medium,
         fontWeight: 'bold',
     }
 })

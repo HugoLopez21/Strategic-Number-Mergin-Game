@@ -10,6 +10,7 @@ import { getTargetNumber, getAdjacency } from '../logic/targetLogic';
 import { getScore } from '../logic/scoringLogic';
 import { checkAdjacency } from '../logic/adjacencyLogic';
 import { blockSelection, gridConfig } from '../constants/gameConfig';
+import { saveGameData } from '../storage/leaderboard';
 export const useGameContext = create((set, get) => ({
     score: 0,
     isGameOver: false,
@@ -19,6 +20,7 @@ export const useGameContext = create((set, get) => ({
     targetNumber: 0,
     penalties: 0,
     currentSum: 0,
+    username: '',
     
     setCurrentSum: (isClicked, coords) =>{
         const {currentSum, board,} = get();
@@ -100,7 +102,7 @@ export const useGameContext = create((set, get) => ({
     },
 
     applyGravity: () => {
-        const { board, isGameOver } = get();
+        const { board, isGameOver, endGame } = get();
         const boardCopy = board.map(row => [...row]);
         let moved = false;
         for (let y = gridConfig.rows - 1; y > 0; y--) {
@@ -117,7 +119,8 @@ export const useGameContext = create((set, get) => ({
             set({ board: boardCopy });
         }
         if (checkGameOver(boardCopy)) {
-            set({ isGameOver: true });
+            console.log("terminando partida")
+            endGame();
         }
     },
 
@@ -159,10 +162,6 @@ export const useGameContext = create((set, get) => ({
     initGame: () =>{
         const newBoard = initializeBoard();
         const newTarget = getTargetNumber(newBoard);
-        set({board: newBoard, targetNumber: newTarget});
-    },
-
-    endGame: () =>{
         const {
             board, 
             score, 
@@ -170,17 +169,30 @@ export const useGameContext = create((set, get) => ({
             speed, 
             selectedBlocks, 
             targetNumber, 
-            penalties
+            penalties,
+            username,
         } = get();
+
         set({
-            board: [],
+            board: newBoard,
             score: 0, 
-            isGameOver: true, 
+            isGameOver: false, 
             speed: 5000, 
             selectedBlocks: [], 
-            targetNumber: 0,
+            targetNumber: newTarget,
             penalties: 0,
         })
+    },
+
+    saveUsername: (newUsername) =>{
+        const {username} = get();
+        set({username: newUsername})
+    },
+
+    endGame: () =>{
+        const {isGameOver, username, score} = get();
+        saveGameData(username, score);
+        set({isGameOver : true})
     }
     
 
