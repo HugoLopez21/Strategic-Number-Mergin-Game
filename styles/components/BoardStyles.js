@@ -23,9 +23,9 @@ export const boardStyles = StyleSheet.create({
     },
     blockSelected: {
         borderColor: "#f7f181",
-        shadowColor: '#fff',
-        shadowOpacity: 0.8,
-        shadowRadius: 4,
+        boxShadowColor: '#fff',
+        boxShadowOpacity: 0.8,
+        boxShadowRadius: 4,
     },
     blockEmpty: {
         backgroundColor: 'rgba(255,255,255,0.05)',

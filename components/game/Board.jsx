@@ -35,7 +35,7 @@ export const Board = () =>{
                         {row.map((cell, x) =>{
                             return (
                                 <Block
-                                    key={`${y}-${x}`} 
+                                    key={`${x}`} 
                                     num={board[y][x]}
                                     coords={{y,x}}
                                 />
