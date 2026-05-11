@@ -53,7 +53,11 @@ export function dropBlocks(selectedBlocks, isPenalty, board, score ){
 }
 
 export function dropRandomBlock(board){
-    board[0][randomChoice(8)] = randomChoice(9,1);
+    const col = randomChoice(8);
+    if (board[0][col] !== null) {
+        return board; 
+    }
+    board[0][col] = randomChoice(9,1);
     return board;
 }
 
