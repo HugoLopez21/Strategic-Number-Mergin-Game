@@ -4,7 +4,7 @@
 
 import { create } from 'zustand';
 import {isPenalty, isCorrectSum, selectedBlocksToNums} from '../logic/scoringLogic'
-import {getGravitySpeed, dropBlocks, gravityDrop, dropRandomBlock, applyGravityStep} from '../logic/blockDropping'
+import {getGravitySpeed, dropBlocks, gravityDrop, dropRandomBlock, applyGravityLogic} from '../logic/blockDropping'
 import { initializeBoard, checkGameOver } from '../logic/boardLogic';
 import { getTargetNumber, getAdjacency } from '../logic/targetLogic';
 import { getScore } from '../logic/scoringLogic';
@@ -102,24 +102,15 @@ export const useGameContext = create((set, get) => ({
     },
 
     applyGravity: () => {
-        const { board, isGameOver, endGame } = get();
-        const boardCopy = board.map(row => [...row]);
-        let moved = false;
-        for (let y = gridConfig.rows - 1; y > 0; y--) {
-            for (let x = 0; x < gridConfig.columns; x++) {
-                if (boardCopy[y][x] === null && boardCopy[y - 1][x] !== null) {
-                    boardCopy[y][x] = boardCopy[y - 1][x];
-                    boardCopy[y - 1][x] = null;
-                    moved = true;
-                }
-            }
-        }
+        const { board, endGame } = get();
+        
+        const { updatedBoard, moved } = applyGravityLogic(board);
 
         if (moved) {
-            set({ board: boardCopy });
+            set({ board: updatedBoard });
         }
-        if (checkGameOver(boardCopy)) {
-            console.log("terminando partida")
+        
+        if (checkGameOver(updatedBoard)) {
             endGame();
         }
     },
@@ -170,7 +161,7 @@ export const useGameContext = create((set, get) => ({
             selectedBlocks, 
             targetNumber, 
             penalties,
-            username,
+
         } = get();
 
         set({

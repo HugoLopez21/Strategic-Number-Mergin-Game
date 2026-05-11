@@ -12,16 +12,25 @@ const {rows, columns} = gridConfig;
  * @param {int} rowPos - current row position
  * @returns {Array<Array>} modified board
  */
-export function applyGravityStep(board, rowPos){
-    for (let x = 0; x< columns;x++){
-        let currentCell = board[rowPos][x];
-        let topCell = board[rowPos-1][x];
-        if (currentCell === null && topCell !== null){
-            board[rowPos][x] = topCell;
-            board[rowPos-1][x] = null;
-        };
-    };
-    return board
+// En blockDropping.js
+
+export function applyGravityLogic(board) {
+    const boardCopy = board.map(row => [...row]); 
+    let moved = false;
+    const rows = board.length;
+    const columns = board[0].length;
+
+    for (let y = rows - 1; y > 0; y--) {
+        for (let x = 0; x < columns; x++) {
+            // if the actual cell is  empy and the top has num
+            if (boardCopy[y][x] === null && boardCopy[y - 1][x] !== null) {
+                boardCopy[y][x] = boardCopy[y - 1][x];
+                boardCopy[y - 1][x] = null;
+                moved = true;
+            }
+        }
+    }
+    return { updatedBoard: boardCopy, moved };
 }
 
 
