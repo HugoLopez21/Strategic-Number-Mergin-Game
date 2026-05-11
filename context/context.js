@@ -63,6 +63,7 @@ export const useGameContext = create((set, get) => ({
         };
     },
 
+    //Only removes the blocks form the first o last position
     removeBlock: (coords, isClicked) =>{
         const {selectedBlocks, setCurrentSum} = get();
         const isSame = (a, b) => a && b && a.x === b.x && a.y === b.y;

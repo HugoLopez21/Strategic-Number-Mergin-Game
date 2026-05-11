@@ -6,14 +6,10 @@ const {rows, columns} = gridConfig;
 
 
 /**
- * Iterate the selected row of the board matrix and interchange the values
- * in case of the cell above is a number and the one below is null
- * @param {Array<Array>} board - Board Matrix
- * @param {int} rowPos - current row position
- * @returns {Array<Array>} modified board
+ * Iterate the board starting from the last rows and changes the cells
+ * @param {*} board 
+ * @returns 
  */
-// En blockDropping.js
-
 export function applyGravityLogic(board) {
     const boardCopy = board.map(row => [...row]); 
     let moved = false;
@@ -36,7 +32,7 @@ export function applyGravityLogic(board) {
 
 export function getGravitySpeed(score){
     const {speedList, min} = speedConfig;
-    let speed = Math.floor(score/ 100);
+    let speed = Math.floor(score / 100);
     if (speed >= speedList.length ) return min;
     else return speedList[speed] * 1000;
 }
