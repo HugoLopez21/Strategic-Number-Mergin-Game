@@ -32,5 +32,24 @@ export const selectionStyles = StyleSheet.create({
         color: colors.text,
         fontWeight: 'bold',
         fontSize: 14,
+    },
+    miniBlock: {
+    width: 32,
+    height: 32,
+    borderRadius: 6,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 2,
+    },
+    miniBlockText: {
+        color: '#ffffff',
+        fontWeight: 'bold',
+        fontSize: 14,
+    },
+    operator: {
+        color: colors.text,
+        fontSize: 16,
+        marginHorizontal: 2,
+        alignSelf: 'center',
     }
 })

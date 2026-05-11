@@ -8,6 +8,7 @@ import { boardStyles } from "../../styles/components/BoardStyles";
 import { globalStyles } from "../../styles/globalStyles";
 import { numbersMap, gridConfig } from "../../constants/gameConfig";
 import { dropRandomBlock } from "../../logic/blockDropping";
+
 export const Board = () =>{
     const { board, speed, dropNewBlock, applyGravity, isGameOver} = useGameContext();
     const gravityIntervalRef = useRef(null);

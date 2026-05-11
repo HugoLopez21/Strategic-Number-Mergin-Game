@@ -5,6 +5,7 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import { useGameContext } from "../../context/context";
 import { selectedBlocksToNums } from "../../logic/scoringLogic";
 import { selectionStyles } from "../../styles/components/SelectionBarStyles";
+import { numbersMap } from "../../constants/gameConfig";
 
 export const SelectionBar = () =>{
     return(
@@ -22,9 +23,11 @@ const SelectedCombination = () =>{
     return (
         <View style={selectionStyles.combination}>
             <Text style={selectionStyles.numText}>SELECTION:</Text>
-            {selectedNums.map(num => {
-                return <Text style={selectionStyles.numText}>{num} +</Text>
-            })}
+            {selectedNums.map((num, index) => (
+                <View key={index} style={[selectionStyles.miniBlock, {backgroundColor: numbersMap[num]?.color}]}>
+                    <Text style={selectionStyles.miniBlockText}>{num}</Text>
+                </View>
+            ))}
             <Text style={selectionStyles.numText}>= {currentSum} </Text>
         </View>
         
