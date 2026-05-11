@@ -7,8 +7,8 @@ const {rows, columns} = gridConfig;
 
 /**
  * Iterate the board starting from the last rows and changes the cells
- * @param {*} board 
- * @returns 
+ * @param {<array><Array>} board 
+ * @returns Thhe modified board, and if it has been moved
  */
 export function applyGravityLogic(board) {
     const boardCopy = board.map(row => [...row]); 
