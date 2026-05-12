@@ -140,7 +140,11 @@ export const useGameContext = create((set, get) => ({
         const selectedNums = selectedBlocksToNums(board, selectedBlocks);
         const {minSelected} = blockSelection;
         //Añadir mensaje en pantalla indicando que no se puede realizar un movimiento con menos de 2 bloques
-        if(selectedNums.length < minSelected) return console.log('turno no ejecutado')
+        if(selectedNums.length < minSelected){
+            setAlertMessage('You cant do this movement')
+            return
+        }
+            
         
             const moveResult = isCorrectSum(targetNumber, currentSum);
         if (moveResult){
@@ -154,6 +158,9 @@ export const useGameContext = create((set, get) => ({
         }else{
             addPenalty();
             setAlertMessage('Movement failed!!!')
+            const newBoard = 
+                dropBlocks(selectedBlocks, isPenalty(penalties), board, score);
+            set({board: newBoard, selectedBlocks: [], currentSum: 0});
         }
         
     },

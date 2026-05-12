@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import { useGameContext } from "../../context/context"
-import { Text } from "react-native";
-import { infoStyles } from "../../styles/components/InfoDisplayStyles";
+import { Text, View } from "react-native";
+import { messageStyles } from "../../styles/components/MessageStyles";
 export const AlertMessage = () =>{
     const {alertMessage, setAlertMessage} = useGameContext();
     useEffect(() =>{
@@ -10,7 +10,14 @@ export const AlertMessage = () =>{
         }, 2000)
         
     },[alertMessage])
+    
     if (alertMessage !== null){
-        return <Text style={infoStyles.value}>{alertMessage}</Text>
+        return (
+            <View style={messageStyles.container}>
+                <View style={messageStyles.alertBox}>
+                    <Text style={messageStyles.text}>{alertMessage}</Text>
+                </View>
+            </View>
+        );
     }
 }

@@ -27,7 +27,9 @@ export const GameScreen = () =>{
             <SafeAreaView style={gameScreenStyles.container}>
                 <InfoDisplay/>
                 <PenaltyIndicator/>
-                <AlertMessage/>
+                <View style={{position: "relative", alignItems: "center"}}>
+                    <AlertMessage/>
+                </View>
                 <Board/>
                 <SelectionBar/>
             </SafeAreaView>
