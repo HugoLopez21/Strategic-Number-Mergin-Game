@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '../globalStyles';
+import { colors, spacing } from '../globalStyles';
 
 export const selectionStyles = StyleSheet.create({
     container: {
@@ -17,9 +17,9 @@ export const selectionStyles = StyleSheet.create({
     },
     confirmButton: {
         width: 100,
-        backgroundColor: '#3a7bd5',
-        paddingHorizontal: 16,
-        paddingVertical: 10,
+        backgroundColor: colors.button,
+        paddingHorizontal: spacing.lg,
+        paddingVertical: spacing.sm,
         borderRadius: 10,
     },
     confirmText: {
@@ -49,7 +49,7 @@ export const selectionStyles = StyleSheet.create({
     label: {
         color: colors.textSecondary,
         fontSize: 10,
-        marginBottom: 4,
+        marginBottom: spacing.xs ,
     },
     blocksRow: {
         flexDirection: 'row',

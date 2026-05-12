@@ -7,6 +7,7 @@ export const colors = {
     textSecondary: '#a0a0a0',
     selected: '#ffffff',
     border: '#4a4a8a',
+    button: '#3a7bd5',
 }
 
 export const typography = {

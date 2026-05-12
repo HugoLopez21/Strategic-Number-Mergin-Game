@@ -1,4 +1,4 @@
-import {React, useEffect} from "react";
+import {React, useEffect, useState} from "react";
 import { Board } from "../../components/game/Board";
 import { PenaltyIndicator } from "../../components/game/PenaltyIndicator";
 import { InfoDisplay } from "../../components/game/InfoDisplay";
@@ -9,7 +9,7 @@ import { gameScreenStyles } from "../../styles/screens/GameScreenStyles";
 import { useGameContext } from "../../context/context";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-
+import { AlertMessage } from "../../components/game/AlertMessage";
 export const GameScreen = () =>{
     const {isGameOver} = useGameContext();
     const navigation = useNavigation();
@@ -27,6 +27,7 @@ export const GameScreen = () =>{
             <SafeAreaView style={gameScreenStyles.container}>
                 <InfoDisplay/>
                 <PenaltyIndicator/>
+                <AlertMessage/>
                 <Board/>
                 <SelectionBar/>
             </SafeAreaView>

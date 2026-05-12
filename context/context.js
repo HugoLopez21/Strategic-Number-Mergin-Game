@@ -11,6 +11,7 @@ import { getScore } from '../logic/scoringLogic';
 import { checkAdjacency } from '../logic/adjacencyLogic';
 import { blockSelection, gridConfig } from '../constants/gameConfig';
 import { saveGameData } from '../storage/leaderboard';
+import { AlertMessage } from '../components/game/AlertMessage';
 export const useGameContext = create((set, get) => ({
     score: 0,
     isGameOver: false,
@@ -21,6 +22,7 @@ export const useGameContext = create((set, get) => ({
     penalties: 0,
     currentSum: 0,
     username: '',
+    alertMessage: null,
     
     setCurrentSum: (isClicked, coords) =>{
         const {currentSum, board,} = get();
@@ -32,7 +34,12 @@ export const useGameContext = create((set, get) => ({
 
     addScore: (points) => {
         const newScore = get().score + points;
+        const {speed, setAlertMessage} = get();
         const newSpeed =  getGravitySpeed(newScore);
+        if (speed !== newSpeed){
+            setAlertMessage('Spead increased')
+        }
+        //setAlertMessage(`+ ${points}`)
         set({ score: newScore, speed: newSpeed });
     },
 
@@ -127,6 +134,7 @@ export const useGameContext = create((set, get) => ({
                 currentSum,
                 penalties,
                 setTargetNumber,
+                setAlertMessage,
             } = get();
         
         const selectedNums = selectedBlocksToNums(board, selectedBlocks);
@@ -141,12 +149,11 @@ export const useGameContext = create((set, get) => ({
         
             addScore(getScore(selectedNums));
             setTargetNumber();
+            setAlertMessage('Movement succes!!!')
             set({board: newBoard, selectedBlocks: [], currentSum: 0});
         }else{
             addPenalty();
-            const newBoard = 
-                dropBlocks(selectedBlocks, isPenalty(penalties), board, score);
-            set({board: newBoard, selectedBlocks: [], currentSum: 0});
+            setAlertMessage('Movement failed!!!')
         }
         
     },
@@ -174,6 +181,11 @@ export const useGameContext = create((set, get) => ({
             targetNumber: newTarget,
             penalties: 0,
         })
+    },
+
+    setAlertMessage: (messages) =>{
+        const {alertMessage} = get();
+        set({alertMessage: messages});
     },
 
     saveUsername: (newUsername) =>{

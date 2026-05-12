@@ -15,7 +15,7 @@ export const menuStyles = StyleSheet.create({
         fontWeight: 'bold',
     },
     button: {
-        backgroundColor: '#3a7bd5',
+        backgroundColor: colors.button,
         paddingHorizontal: 40,
         paddingVertical: 14,
         borderRadius: 12,
