@@ -8,6 +8,7 @@ import { colors } from "../../styles/globalStyles";
 import { gameScreenStyles } from "../../styles/screens/GameScreenStyles";
 import { useGameContext } from "../../context/context";
 import { useNavigation } from "@react-navigation/native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 export const GameScreen = () =>{
     const {isGameOver} = useGameContext();
@@ -17,17 +18,19 @@ export const GameScreen = () =>{
         if(isGameOver) {
             setTimeout(() =>{
                 navigation.navigate('GameOver');
-            }, 2000)
+            }, 1000)
         }
     }, [isGameOver]);
 
     return (
-        <View style={gameScreenStyles.container}>
-            <InfoDisplay/>
-            <PenaltyIndicator/>
-            <Board/>
-            <SelectionBar/>
-        </View>
+        <SafeAreaProvider>
+            <SafeAreaView style={gameScreenStyles.container}>
+                <InfoDisplay/>
+                <PenaltyIndicator/>
+                <Board/>
+                <SelectionBar/>
+            </SafeAreaView>
+        </SafeAreaProvider>    
     )
 }
 

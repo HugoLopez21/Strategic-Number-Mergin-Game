@@ -12,17 +12,11 @@ export const selectionStyles = StyleSheet.create({
         borderTopColor: colors.border,
     },
     combination: {
-        flexDirection: 'row',
-        alignItems: 'center',
+        flexDirection: 'column',
         flex: 1,
     },
-    numText: {
-        color: colors.text,
-        fontSize: 16,
-        fontWeight: 'bold',
-        marginHorizontal: 2,
-    },
     confirmButton: {
+        width: 100,
         backgroundColor: '#3a7bd5',
         paddingHorizontal: 16,
         paddingVertical: 10,
@@ -51,5 +45,19 @@ export const selectionStyles = StyleSheet.create({
         fontSize: 16,
         marginHorizontal: 2,
         alignSelf: 'center',
-    }
+    },
+    label: {
+        color: colors.textSecondary,
+        fontSize: 10,
+        marginBottom: 4,
+    },
+    blocksRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+    },
+    blockRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
 })

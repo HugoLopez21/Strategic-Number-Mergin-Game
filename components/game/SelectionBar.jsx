@@ -22,15 +22,21 @@ const SelectedCombination = () =>{
     const selectedNums = selectedBlocksToNums(board, selectedBlocks);
     return (
         <View style={selectionStyles.combination}>
-            <Text style={selectionStyles.numText}>SELECTION:</Text>
-            {selectedNums.map((num, index) => (
-                <View key={index} style={[selectionStyles.miniBlock, {backgroundColor: numbersMap[num]?.color}]}>
-                    <Text style={selectionStyles.miniBlockText}>{num}</Text>
-                </View>
-            ))}
-            <Text style={selectionStyles.numText}>= {currentSum} </Text>
-        </View>
-        
+            <Text style={selectionStyles.label}>SELECTION:</Text>
+            <View style={selectionStyles.blocksRow}>
+                {selectedNums.map((num, index) => (
+                    <View key={index} style={selectionStyles.blockRow}>
+                        <View style={[selectionStyles.miniBlock, {backgroundColor: numbersMap[num]?.color}]}>
+                            <Text style={selectionStyles.miniBlockText}>{num}</Text>
+                        </View>
+                        {index < selectedNums.length - 1 && (
+                            <Text style={selectionStyles.operator}>+</Text>
+                        )}
+                    </View>
+                ))}
+                <Text style={selectionStyles.operator}>= {currentSum} </Text>
+            </View>
+        </View>   
     )
 }
 
