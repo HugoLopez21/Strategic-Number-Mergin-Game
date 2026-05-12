@@ -58,12 +58,13 @@ export function dropBlocks(selectedBlocks, isPenalty, board, score ){
 }
 
 export function dropRandomBlock(board){
+    const newBoard = board.map(row=> [...row]);
     const col = randomChoice(8);
-    if (board[0][col] !== null) {
+    if (newBoard[0][col] !== null) {
         return board; 
     }
-    board[0][col] = randomChoice(9,1);
-    return board;
+    newBoard[0][col] = randomChoice(9,1);
+    return newBoard;
 }
 
 
