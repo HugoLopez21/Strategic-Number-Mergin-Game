@@ -18,7 +18,10 @@ export const Board = () =>{
     useEffect(() => {
             if (isGameOver) return;
             const gravityInterval = setInterval(() => {
-                applyGravity();
+                setTimeout( () =>{
+                    applyGravity();
+                }, 100)
+                
             // The block move 1 position in the interval of the speed / the numbers of rows of the grid
             }, speed / gridConfig.rows);
 
@@ -39,7 +42,7 @@ export const Board = () =>{
                         {row.map((cell, x) =>{
                             return (
                                 <Block
-                                    key={`${x}`} 
+                                    key={`${y}-${x}`} 
                                     num={board[y][x]}
                                     coords={{y,x}}
                                 />
