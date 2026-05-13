@@ -8,32 +8,35 @@ import { boardStyles } from "../../styles/components/BoardStyles";
 import { globalStyles } from "../../styles/globalStyles";
 import { numbersMap, gridConfig } from "../../constants/gameConfig";
 import { dropRandomBlock } from "../../logic/blockDropping";
+import { useIsFocused } from '@react-navigation/native';
 
 export const Board = () =>{
-    const { board, speed, dropNewBlock, applyGravity, isGameOver} = useGameContext();
-    const gravityIntervalRef = useRef(null);
-    const dropIntervalRef = useRef(null);
+    const isFocused = useIsFocused();
+    const { 
+        board, 
+        speed, 
+        dropNewBlock, 
+        applyGravity, 
+        isGameOver
+    } = useGameContext();
         
-    
     useEffect(() => {
-            if (isGameOver) return;
-            const gravityInterval = setInterval(() => {
-                setTimeout( () =>{
-                    applyGravity();
-                }, 100)
-                
-            // The block move 1 position in the interval of the speed / the numbers of rows of the grid
-            }, speed / gridConfig.rows);
+        // The block move 1 position in the interval of the speed / the numbers of rows of the grid
+        if (isGameOver || !isFocused) return;
+    
+        const gravityInterval = setInterval(() => {
+            applyGravity();
+        }, speed / gridConfig.rows);
 
-            const dropInterval = setInterval(() => {
-                dropNewBlock();
-            }, speed);
+        const dropInterval = setInterval(() => {
+            dropNewBlock();
+        }, speed);
 
-            return () => {
-                clearInterval(gravityInterval);
-                clearInterval(dropInterval);
-            };
-        }, [speed, isGameOver]);
+        return () => {
+            clearInterval(gravityInterval);
+            clearInterval(dropInterval);
+        };
+    }, [speed, isGameOver, isFocused]);
     return (
         <View style={boardStyles.container}>
             {board.map((row, y) =>{

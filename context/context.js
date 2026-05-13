@@ -11,7 +11,6 @@ import { getScore } from '../logic/scoringLogic';
 import { checkAdjacency } from '../logic/adjacencyLogic';
 import { blockSelection, gridConfig } from '../constants/gameConfig';
 import { saveGameData } from '../storage/leaderboard';
-import { AlertMessage } from '../components/game/AlertMessage';
 export const useGameContext = create((set, get) => ({
     score: 0,
     isGameOver: false,
@@ -111,7 +110,6 @@ export const useGameContext = create((set, get) => ({
 
     applyGravity: () => {
         const { board, endGame } = get();
-        
         const { updatedBoard, moved } = applyGravityLogic(board);
 
         if (moved) {
