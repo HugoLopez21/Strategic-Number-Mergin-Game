@@ -1,6 +1,6 @@
 // Board and blocks component on the screen
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import {View, Text, TouchableOpacity} from 'react-native';
 import {useState} from 'react';
 import { useGameContext } from "../../context/context";
@@ -17,9 +17,13 @@ export const Board = () =>{
         speed, 
         dropNewBlock, 
         applyGravity, 
-        isGameOver
+        isGameOver,
+        addSelectedBlock,
+        removeBlock,
+        selectedBlocks,
     } = useGameContext();
-        
+    const addSelectedBlockCb = useCallback(addSelectedBlock, []);
+    const removeBlockCb = useCallback(removeBlock, []);
     useEffect(() => {
         // The block move 1 position in the interval of the speed / the numbers of rows of the grid
         if (isGameOver || !isFocused) return;
@@ -48,6 +52,9 @@ export const Board = () =>{
                                     key={`${y}-${x}`} 
                                     num={board[y][x]}
                                     coords={{y,x}}
+                                    removeBlock={removeBlockCb}
+                                    addSelectedBlock={addSelectedBlockCb}
+                                    isClicked={selectedBlocks.some(c => c.y === y && c.x === x)}
                                 />
                             )
                         })}
@@ -60,11 +67,9 @@ export const Board = () =>{
 
 
 
-export const Block = (props) =>{
-    const { addSelectedBlock, selectedBlocks, removeBlock, setCurrentSum} = useGameContext();
-
+export const Block = React.memo((props) =>{
+    const {addSelectedBlock, removeBlock, isClicked} = props;
     // Check if the block is clicked
-    const isClicked = selectedBlocks.some(c => c.y === props.coords.y && c.x === props.coords.x);
     const clickBlock = () =>{
         if(!isClicked){
             addSelectedBlock(props.coords, true);
@@ -89,5 +94,5 @@ export const Block = (props) =>{
             </View>
         </TouchableOpacity>
     )
-}
+});
 
