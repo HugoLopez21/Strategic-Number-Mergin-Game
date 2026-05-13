@@ -39,22 +39,22 @@ export function getGravitySpeed(score){
 
 //Generates random numbers in all of the cells of the first row
 export function dropBlocks(selectedBlocks, isPenalty, board, score ){
-    
     const speed = getGravitySpeed(score);
+    const boardCopy = board.map(row => [...row])
     selectedBlocks.forEach(coord => {
         const {y, x} = coord;
-        board[y][x] = null;
+        boardCopy[y][x] = null;
     })
     if(isPenalty){
-        board[0].forEach((x, index) => {
+        boardCopy[0].forEach((x, index) => {
             if( x != null) return;
             else{
-            board[0][index] = randomChoice(9,1);
+            boardCopy[0][index] = randomChoice(9,1);
             }
         })
     }
     
-    return board;
+    return boardCopy;
 }
 
 export function dropRandomBlock(board){
