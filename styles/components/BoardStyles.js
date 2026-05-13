@@ -34,8 +34,5 @@ export const boardStyles = StyleSheet.create({
         color: colors.text,
         fontWeight: 'bold',
         fontSize: 14,
-        textShadowColor: 'rgba(0, 0, 0)',
-        textShadowOffset: { width: 0, height: 0 }, 
-        textShadowRadius: 1,
     }
 })
