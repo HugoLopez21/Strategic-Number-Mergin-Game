@@ -89,16 +89,15 @@ export const useGameContext = create((set, get) => ({
     },
 
     addPenalty: () =>{
-        const {penalties, board, isGameOver} = get();
+        const {penalties} = get();
         let newPenalties = null;
         let setIsGameOver = false;
         if(isPenalty(penalties)){ 
-            setIsGameOver = checkGameOver(board);
             newPenalties = 0;
         }else{
             newPenalties = penalties + 1;
         }
-        set({penalties: newPenalties, isGameOver : setIsGameOver});
+        set({penalties: newPenalties});
         
     },
 
