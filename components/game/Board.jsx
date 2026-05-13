@@ -71,7 +71,7 @@ export const Block = React.memo((props) =>{
     const {addSelectedBlock, removeBlock, isClicked} = props;
     // Check if the block is clicked
     const clickBlock = () =>{
-        if(!isClicked){
+        if(!isClicked && props.num !== null){
             addSelectedBlock(props.coords, true);
         }else{
             removeBlock(props.coords, false);
