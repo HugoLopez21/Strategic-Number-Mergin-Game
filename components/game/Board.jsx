@@ -1,6 +1,6 @@
 // Board and blocks component on the screen
 
-import React, { useEffect, useRef, useCallback } from "react";
+import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import {View, Text, TouchableOpacity} from 'react-native';
 import {useState} from 'react';
 import { useGameContext } from "../../context/context";
@@ -41,26 +41,27 @@ export const Board = () =>{
             clearInterval(dropInterval);
         };
     }, [speed, isGameOver, isFocused]);
+
+    const memoBoard = useMemo(() =>{
+        return board.map((row, y) => (
+        <View key={y} style={boardStyles.row}>
+            {row.map((cell, x) => (
+                <Block
+                    key={`${y}-${x}`} 
+                    num={board[y][x]}
+                    coords={{y,x}}
+                    removeBlock={removeBlockCb}
+                    addSelectedBlock={addSelectedBlockCb}
+                    isClicked={selectedBlocks.some(c => c.y === y && c.x === x)}
+                />
+            ))}
+        </View>
+    ));
+    }, [board, selectedBlocks]);
+
     return (
         <View style={boardStyles.container}>
-            {board.map((row, y) =>{
-                return (
-                    <View key={y} style={boardStyles.row}>
-                        {row.map((cell, x) =>{
-                            return (
-                                <Block
-                                    key={`${y}-${x}`} 
-                                    num={board[y][x]}
-                                    coords={{y,x}}
-                                    removeBlock={removeBlockCb}
-                                    addSelectedBlock={addSelectedBlockCb}
-                                    isClicked={selectedBlocks.some(c => c.y === y && c.x === x)}
-                                />
-                            )
-                        })}
-                    </View>
-                )
-            })}
+            {memoBoard}
         </View>
     )
 }

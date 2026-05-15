@@ -165,28 +165,31 @@ export const useGameContext = create((set, get) => ({
     initGame: () =>{
         const newBoard = initializeBoard();
         const newTarget = getTargetNumber(newBoard);
+        
         const {
             board, 
-            score, 
-            isGameOver, 
-            speed, 
-            selectedBlocks, 
-            targetNumber, 
-            penalties,
-            currentSum,
+            targetNumber,
+            resetGame, 
         } = get();
 
+        resetGame();
         set({
             board: newBoard,
-            score: 0, 
-            isGameOver: false, 
-            speed: 5000, 
-            selectedBlocks: [], 
             targetNumber: newTarget,
-            penalties: 0,
-            currentSum: 0,
         })
     },
+
+    resetGame: () => set({
+        score: 0, 
+        isGameOver: false, 
+        speed: 5000, 
+        selectedBlocks: [], 
+        board: [], 
+        targetNumber: 0, 
+        penalties: 0, 
+        currentSum: 0, 
+        alertMessage: null
+    }),
 
     setAlertMessage: (messages) =>{
         const {alertMessage} = get();

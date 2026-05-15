@@ -5,9 +5,10 @@ import { gameOverStyles } from "../../styles/screens/GameOverScreenStyles";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 export const GameOverScreen = () =>{
-    const {score} = useGameContext();
+    const {score, resetGame} = useGameContext();
     const navigation = useNavigation();
     const handleReturnMenu = () =>{
+        resetGame();
         navigation.navigate("Menu");
     }
     return (
