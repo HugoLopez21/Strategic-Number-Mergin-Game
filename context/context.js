@@ -173,7 +173,7 @@ export const useGameContext = create((set, get) => ({
             selectedBlocks, 
             targetNumber, 
             penalties,
-
+            currentSum,
         } = get();
 
         set({
@@ -184,6 +184,7 @@ export const useGameContext = create((set, get) => ({
             selectedBlocks: [], 
             targetNumber: newTarget,
             penalties: 0,
+            currentSum: 0,
         })
     },
 
