@@ -108,11 +108,13 @@ export const useGameContext = create((set, get) => ({
     },
 
     applyGravity: () => {
-        const { board, endGame } = get();
+        const { board, endGame, targetNumber, setTargetNumber } = get();
         const { updatedBoard, moved } = applyGravityLogic(board);
 
         if (moved) {
             set({ board: updatedBoard });
+        } else if (targetNumber === 0) {
+            setTargetNumber();
         }
         
         if (checkGameOver(updatedBoard)) {
@@ -149,15 +151,14 @@ export const useGameContext = create((set, get) => ({
                 dropBlocks(selectedBlocks, false, board, score);
         
             addScore(getScore(selectedNums));
-            setTargetNumber();
             setAlertMessage('Movement succes!!!')
-            set({board: newBoard, selectedBlocks: [], currentSum: 0});
+            set({board: newBoard, selectedBlocks: [], currentSum: 0, targetNumber: 0});
         }else{
             addPenalty();
             setAlertMessage('Movement failed!!!')
             const newBoard = 
                 dropBlocks(selectedBlocks, isPenalty(penalties), board, score);
-            set({board: newBoard, selectedBlocks: [], currentSum: 0});
+            set({board: newBoard, selectedBlocks: [], currentSum: 0, targetNumber: 0});
         }
         
     },
