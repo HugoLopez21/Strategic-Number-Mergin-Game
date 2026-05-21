@@ -37,23 +37,26 @@ export function getGravitySpeed(score){
     else return speedList[speed] * 1000;
 }
 
-//Generates random numbers in all of the cells of the first row
-export function dropBlocks(selectedBlocks, isPenalty, board, score ){
-    const speed = getGravitySpeed(score);
+
+export function dropBlocks(selectedBlocks, board){
     const boardCopy = board.map(row => [...row])
     selectedBlocks.forEach(coord => {
         const {y, x} = coord;
         boardCopy[y][x] = null;
     })
-    if(isPenalty){
-        boardCopy[0].forEach((x, index) => {
-            if( x != null) return;
-            else{
-            boardCopy[0][index] = randomChoice(9,1);
-            }
-        })
-    }
     
+    return boardCopy;
+}
+
+//Generates random numbers in all of the cells of the first row
+export function dropRow(board){
+    const boardCopy = board.map(row => [...row])
+    boardCopy[0].forEach((x, index) => {
+        if( x != null) return;
+        else{
+        boardCopy[0][index] = randomChoice(9,1);
+        }
+    })
     return boardCopy;
 }
 

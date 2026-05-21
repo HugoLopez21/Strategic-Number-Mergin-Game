@@ -148,7 +148,7 @@ export const useGameContext = create((set, get) => ({
             const moveResult = isCorrectSum(targetNumber, currentSum);
         if (moveResult){
             const newBoard = 
-                dropBlocks(selectedBlocks, false, board, score);
+                dropBlocks(selectedBlocks, board,);
         
             addScore(getScore(selectedNums));
             setAlertMessage('Movement succes!!!')
@@ -156,9 +156,12 @@ export const useGameContext = create((set, get) => ({
         }else{
             addPenalty();
             setAlertMessage('Movement failed!!!')
-            const newBoard = 
-                dropBlocks(selectedBlocks, isPenalty(penalties), board, score);
+            if (isPenalty(penalties)){
+                const newBoard = 
+                dropRow(board);
             set({board: newBoard, selectedBlocks: [], currentSum: 0, targetNumber: 0});
+            }
+            
         }
         
     },
